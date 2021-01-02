@@ -68,25 +68,24 @@ const App = () => {
   };
 
   const changeQuestions = () => {
-    //　様々な問題+回答が入った配列をシャッフルする処理
+    //　様々な問題+回答が入った配列をシャッフル
     for (let i = questionsAnswers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const tmp = questionsAnswers[i];
       questionsAnswers[i] = questionsAnswers[j];
       questionsAnswers[j] = tmp;
     }
-    // stateに問題+回答を格納
-    setGetQuestionsAnswers(questionsAnswers.shift()!); // !つけたらエラー消えた（nonnullアサーション）
-    console.log(answers) // <= なんで？？？？？新しい問題と回答が入ってるはずでは？？？？？
-    // 3つの回答をシャッフル
-    // for (let i = answers.length - 1; i > 0; i--) {
-    //   const j = Math.floor(Math.random() * (i + 1));
-    //   const tmp = answers[i];
-    //   answers[i] = answers[j];
-    //   answers[j] = tmp;
-    // }
-    // シャッフルした回答をstateにセット
-    // setGetQuestionsAnswers(getQuestionsAnswers);
+    // 変数nextAnswersにシャッフルした配列の一番上のオブジェクトのanswersを代入
+    const nextAnswers = questionsAnswers[0].answers
+    // nextAnswersをシャッフル
+    for (let i = nextAnswers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = nextAnswers[i];
+      nextAnswers[i] = nextAnswers[j];
+      nextAnswers[j] = tmp;
+    }
+    // getQuestionsAnswersにquestionsAnswerdの一番上のオブジェクト（Answersシャッフル済み）を代入
+    setGetQuestionsAnswers(questionsAnswers.shift()!)
   };
 
   // console.log(answers);
