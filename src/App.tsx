@@ -2,49 +2,58 @@ import React, { useState } from "react";
 import "./App.css";
 
 import { Button } from "@material-ui/core";
-import { couldStartTrivia } from "typescript";
 
-const App = () => {
+const App: React.FC = () => {
   const [questionsAnswers, setQuestionsAnswers] = useState([
     {
       questions: "apple",
       answers: ["1リンゴ", "2バナナ", "3ブドウ"],
+      correctAnswer: "1リンゴ",
     },
     {
       questions: "fox",
       answers: ["1キツネ", "2タヌキ", "3クマ"],
+      correctAnswer: "1キツネ",
     },
     {
       questions: "guitar",
       answers: ["1ギター", "2ベース", "3ドラム"],
+      correctAnswer: "1ギター",
     },
     {
       questions: "red",
       answers: ["1赤", "2青", "3緑"],
+      correctAnswer: "1赤",
     },
     {
       questions: "car",
       answers: ["1車", "2電車", "3飛行機"],
+      correctAnswer: "1車",
     },
     {
       questions: "buy",
       answers: ["1買う", "2売る", "3交換する"],
+      correctAnswer: "1買う",
     },
     {
       questions: "have",
       answers: ["1持っている", "2住んでいる", "3立っている"],
+      correctAnswer: "1持っている",
     },
     {
       questions: "snow",
       answers: ["1雪", "2雷", "3雨"],
+      correctAnswer: "1雪",
     },
     {
       questions: "fly",
       answers: ["1飛ぶ", "2潜る", "3寝る"],
+      correctAnswer: "1飛ぶ",
     },
     {
       questions: "run",
       answers: ["1走る", "2歩く", "3移動する"],
+      correctAnswer: "1走る",
     },
   ]);
 
@@ -52,6 +61,7 @@ const App = () => {
     // そもそもこれはstateで管理する必要があるのか？
     questions: "初期値",
     answers: ["1初期値", "2初期値", "3初期値"],
+    correctAnswer: "1初期値",
   });
 
   const [score, setScore] = useState(0);
@@ -76,7 +86,7 @@ const App = () => {
       questionsAnswers[j] = tmp;
     }
     // 変数nextAnswersにシャッフルした配列の一番上のオブジェクトのanswersを代入
-    const nextAnswers = questionsAnswers[0].answers
+    const nextAnswers = questionsAnswers[0].answers;
     // nextAnswersをシャッフル
     for (let i = nextAnswers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -85,22 +95,50 @@ const App = () => {
       nextAnswers[j] = tmp;
     }
     // getQuestionsAnswersにquestionsAnswerdの一番上のオブジェクト（Answersシャッフル済み）を代入
-    setGetQuestionsAnswers(questionsAnswers.shift()!)
+    setGetQuestionsAnswers(questionsAnswers.shift()!);
   };
 
-  // console.log(answers);
-  const correct = () => {
-    // alert("正解！");
-    setScore(score + 1);
-    setQuestionNumber(questionNumber + 1);
-    changeQuestions();
-    // console.log(getQuestionsAnswers)
+  const check1 = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (
+      document.getElementById("button1")?.textContent ===
+      getQuestionsAnswers.correctAnswer
+    ) {
+      setScore(score + 1);
+      setQuestionNumber(questionNumber + 1);
+      changeQuestions();
+    } else {
+      alert("残念！");
+      setQuestionNumber(questionNumber + 1);
+      changeQuestions();
+    }
   };
-
-  const wrong = () => {
-    alert("残念！");
-    setQuestionNumber(questionNumber + 1);
-    changeQuestions();
+  const check2 = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (
+      document.getElementById("button2")?.textContent ===
+      getQuestionsAnswers.correctAnswer
+    ) {
+      setScore(score + 1);
+      setQuestionNumber(questionNumber + 1);
+      changeQuestions();
+    } else {
+      alert("残念！");
+      setQuestionNumber(questionNumber + 1);
+      changeQuestions();
+    }
+  };
+  const check3 = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (
+      document.getElementById("button3")?.textContent ===
+      getQuestionsAnswers.correctAnswer
+    ) {
+      setScore(score + 1);
+      setQuestionNumber(questionNumber + 1);
+      changeQuestions();
+    } else {
+      alert("残念！");
+      setQuestionNumber(questionNumber + 1);
+      changeQuestions();
+    }
   };
 
   if (questionNumber === 11) {
@@ -114,17 +152,17 @@ const App = () => {
         variant="contained"
         color="primary"
         className="buttonSize"
-        onClick={correct}
+        onClick={check1}
+        id="button1"
       >
-        {/* {getQuestionsAnswers.answers.shift()とか{getQuestionsAnswers.answers.splice()とかで、ランダムにとろうとしたけどダメだった、changeした後に何も表示されなくなる、spliceの戻り値がから配列だからかも、要確認、なぜshiftもダメ？（配列が空になったのがなぜか引き継がれてる、問題文は表示されてるからレンダリングは問題なくできてるはずだけどなあ） */}
         {answers[0]}
-        {/* {console.log(getQuestionsAnswers)} */}
       </Button>
       <Button
         variant="contained"
         color="primary"
         className="buttonSize"
-        onClick={wrong}
+        onClick={check2}
+        id="button2"
       >
         {answers[1]}
       </Button>
@@ -132,11 +170,15 @@ const App = () => {
         variant="contained"
         color="primary"
         className="buttonSize"
-        onClick={wrong}
+        onClick={check3}
+        id="button3"
       >
         {answers[2]}
       </Button>
-      <h2>{`${questionNumber}問目　正解数: ${score}`}</h2>
+      <h2>{`${questionNumber}問目　現在の正解数: ${score}`}</h2>
+      <Button variant="contained" color="secondary" onClick={() => document.location.reload()}>
+        初めからやり直す
+      </Button>
     </div>
   );
 };
