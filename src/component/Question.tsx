@@ -1,5 +1,5 @@
 import React from "react";
-
+// Propsの型
 interface PROPS {
   question: string;
 }

@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import "./css/styles.css";
 import Answers from "./component/Answers";
 import Question from "./component/Question";
+import Form from "./component/Form";
 import { Button } from "@material-ui/core";
 
 const App: React.FC = () => {
-  const [questionAnswers, setQuestionAnswers] = useState([
+  interface QUESTIONANSWERS {
+    question: string;
+    answers: string[];
+    correctAnswer: string;
+  }
+
+  const [questionAnswers, setQuestionAnswers] = useState<QUESTIONANSWERS[]>([
     {
       question: "apple",
       answers: ["1リンゴ", "2バナナ", "3ブドウ", "4モモ"],
@@ -171,6 +178,10 @@ const App: React.FC = () => {
       >
         初めからやり直す
       </Button>
+      <Form
+        questionAnswers={questionAnswers}
+        setQuestionAnswers={setQuestionAnswers}
+      />
     </div>
   );
 };
