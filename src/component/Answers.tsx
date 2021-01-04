@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-
+// Propsの型
 interface PROPS {
   answers: string[];
   check1: VoidFunction;
