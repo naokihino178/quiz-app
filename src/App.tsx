@@ -7,52 +7,52 @@ const App: React.FC = () => {
   const [questionsAnswers, setQuestionsAnswers] = useState([
     {
       questions: "apple",
-      answers: ["1リンゴ", "2バナナ", "3ブドウ"],
+      answers: ["1リンゴ", "2バナナ", "3ブドウ", "4モモ"],
       correctAnswer: "1リンゴ",
     },
     {
       questions: "fox",
-      answers: ["1キツネ", "2タヌキ", "3クマ"],
+      answers: ["1キツネ", "2タヌキ", "3クマ", "4ライオン"],
       correctAnswer: "1キツネ",
     },
     {
       questions: "guitar",
-      answers: ["1ギター", "2ベース", "3ドラム"],
+      answers: ["1ギター", "2ベース", "3ドラム", "4シタール"],
       correctAnswer: "1ギター",
     },
     {
       questions: "red",
-      answers: ["1赤", "2青", "3緑"],
+      answers: ["1赤", "2青", "3緑", "4黒"],
       correctAnswer: "1赤",
     },
     {
       questions: "car",
-      answers: ["1車", "2電車", "3飛行機"],
+      answers: ["1車", "2電車", "3飛行機", "4バス"],
       correctAnswer: "1車",
     },
     {
       questions: "buy",
-      answers: ["1買う", "2売る", "3交換する"],
+      answers: ["1買う", "2売る", "3交換する", "4壊す"],
       correctAnswer: "1買う",
     },
     {
       questions: "have",
-      answers: ["1持っている", "2住んでいる", "3立っている"],
+      answers: ["1持っている", "2住んでいる", "3立っている", "4知っている"],
       correctAnswer: "1持っている",
     },
     {
       questions: "snow",
-      answers: ["1雪", "2雷", "3雨"],
+      answers: ["1雪", "2雷", "3雨", "4嵐"],
       correctAnswer: "1雪",
     },
     {
       questions: "fly",
-      answers: ["1飛ぶ", "2潜る", "3寝る"],
+      answers: ["1飛ぶ", "2潜る", "3寝る", "4泣く"],
       correctAnswer: "1飛ぶ",
     },
     {
       questions: "run",
-      answers: ["1走る", "2歩く", "3移動する"],
+      answers: ["1走る", "2歩く", "3移動する", "4入る"],
       correctAnswer: "1走る",
     },
   ]);
@@ -60,22 +60,15 @@ const App: React.FC = () => {
   const [getQuestionsAnswers, setGetQuestionsAnswers] = useState({
     // そもそもこれはstateで管理する必要があるのか？
     questions: "初期値",
-    answers: ["1初期値", "2初期値", "3初期値"],
+    answers: ["1初期値", "2初期値", "3初期値", "4初期値"],
     correctAnswer: "1初期値",
   });
 
   const [score, setScore] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(1);
 
-  const questionsLength = questionsAnswers.length; // 問題文+回答のオブジェクトを要素とした配列の長さ（2）
-  const random = Math.random() * Math.floor(getQuestionsAnswers.answers.length);
   const questions = getQuestionsAnswers.questions;
   const answers = getQuestionsAnswers.answers;
-
-  // 最大値までのランダムな整数を返す関数
-  const getRandomInt = (max: number) => {
-    return Math.floor(Math.random() * Math.floor(max));
-  };
 
   const changeQuestions = () => {
     //　様々な問題+回答が入った配列をシャッフル
@@ -140,6 +133,20 @@ const App: React.FC = () => {
       changeQuestions();
     }
   };
+  const check4 = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (
+      document.getElementById("button4")?.textContent ===
+      getQuestionsAnswers.correctAnswer
+    ) {
+      setScore(score + 1);
+      setQuestionNumber(questionNumber + 1);
+      changeQuestions();
+    } else {
+      alert("残念！");
+      setQuestionNumber(questionNumber + 1);
+      changeQuestions();
+    }
+  };
 
   if (questionNumber === 11) {
     alert(`終了！ ${score * 10}点！`);
@@ -174,6 +181,15 @@ const App: React.FC = () => {
         id="button3"
       >
         {answers[2]}
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        className="buttonSize"
+        onClick={check4}
+        id="button4"
+      >
+        {answers[3]}
       </Button>
       <h2>{`${questionNumber}問目　現在の正解数: ${score}`}</h2>
       <Button variant="contained" color="secondary" onClick={() => document.location.reload()}>
