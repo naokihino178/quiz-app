@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/styles.css";
 import Answers from "./component/Answers";
 import Question from "./component/Question";
 import Form from "./component/Form";
 import { Button } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+import { Twitter } from "@material-ui/icons";
+// import { Alert } from '@material-ui/lab'
 
 const App: React.FC = () => {
   interface QUESTIONANSWERS {
@@ -38,35 +41,9 @@ const App: React.FC = () => {
       answers: ["1車", "2電車", "3飛行機", "4バス"],
       correctAnswer: "1車",
     },
-    {
-      question: "buy",
-      answers: ["1買う", "2売る", "3交換する", "4壊す"],
-      correctAnswer: "1買う",
-    },
-    {
-      question: "have",
-      answers: ["1持っている", "2住んでいる", "3立っている", "4知っている"],
-      correctAnswer: "1持っている",
-    },
-    {
-      question: "snow",
-      answers: ["1雪", "2雷", "3雨", "4嵐"],
-      correctAnswer: "1雪",
-    },
-    {
-      question: "fly",
-      answers: ["1飛ぶ", "2潜る", "3寝る", "4泣く"],
-      correctAnswer: "1飛ぶ",
-    },
-    {
-      question: "run",
-      answers: ["1走る", "2歩く", "3移動する", "4入る"],
-      correctAnswer: "1走る",
-    },
   ]);
 
   const [getQuestionAnswers, setGetQuestionAnswers] = useState({
-    // そもそもこれはstateで管理する必要があるのか？
     question: "初期値",
     answers: ["1初期値", "2初期値", "3初期値", "4初期値"],
     correctAnswer: "1初期値",
@@ -74,6 +51,7 @@ const App: React.FC = () => {
 
   const [score, setScore] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(1);
+  const [qaSwitch, setQaSwitch] = useState(true);
 
   const question = getQuestionAnswers.question;
   const answers = getQuestionAnswers.answers;
@@ -108,7 +86,6 @@ const App: React.FC = () => {
       setQuestionNumber(questionNumber + 1);
       changeQuestions();
     } else {
-      alert("残念！");
       setQuestionNumber(questionNumber + 1);
       changeQuestions();
     }
@@ -122,7 +99,6 @@ const App: React.FC = () => {
       setQuestionNumber(questionNumber + 1);
       changeQuestions();
     } else {
-      alert("残念！");
       setQuestionNumber(questionNumber + 1);
       changeQuestions();
     }
@@ -136,7 +112,6 @@ const App: React.FC = () => {
       setQuestionNumber(questionNumber + 1);
       changeQuestions();
     } else {
-      alert("残念！");
       setQuestionNumber(questionNumber + 1);
       changeQuestions();
     }
@@ -150,34 +125,54 @@ const App: React.FC = () => {
       setQuestionNumber(questionNumber + 1);
       changeQuestions();
     } else {
-      alert("残念！");
       setQuestionNumber(questionNumber + 1);
       changeQuestions();
     }
   };
+  console.log(questionAnswers.length); // 最後に二回0が表示されるのはなぜ？？
 
-  if (questionNumber === 11) {
-    alert(`終了！ ${score * 10}点！`);
-  }
+  useEffect(() => {
+    if (questionAnswers.length < 1) {
+      setQaSwitch(false);
+      // alert(`終了！ ${score * 10}点！`);
+    }
+  }, [getQuestionAnswers]); // getQuestionAnswersの変更時のみ実行（questionAnswersじゃダメだったわ）、それとこのエラーは何？？
 
   return (
     <div className="container">
-      <Question question={question} />
-      <Answers
-        answers={answers}
-        check1={check1}
-        check2={check2}
-        check3={check3}
-        check4={check4}
-      />
-      <h2>{`${questionNumber}問目　現在の正解数: ${score}`}</h2>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => document.location.reload()}
-      >
-        初めからやり直す
-      </Button>
+      {qaSwitch ? (
+        <>
+          <Question question={question} />
+          <Answers
+            answers={answers}
+            check1={check1}
+            check2={check2}
+            check3={check3}
+            check4={check4}
+          />
+          <h2>{`${questionNumber}問目　現在の正解数: ${score}`}</h2>
+        </>
+      ) : (
+        <div className="answersContainer">
+          <h1>結果</h1>
+          <h2>問題数：{questionNumber}</h2>
+          <h2>正解数：{score}</h2>
+          <h2>正解率：{Math.round((score / questionNumber) * 100)}%</h2>
+          <div className="flex">
+            <Button variant="contained" color="primary">
+              <Twitter />
+              <span>結果をTweetする</span>
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => document.location.reload()}
+            >
+              初めからやり直す
+            </Button>
+          </div>
+        </div>
+      )}
       <Form
         questionAnswers={questionAnswers}
         setQuestionAnswers={setQuestionAnswers}
