@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./css/styles.css";
-import Answers from "./component/Answers";
-import Question from "./component/Question";
+import Game from "./component/Game";
 import Form from "./component/Form";
-import { Button } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
-import { Twitter } from "@material-ui/icons";
+// import { Alert } from "@material-ui/lab";
+// import { Create } from "@material-ui/icons";
+import { Link, BrowserRouter as Router, Route } from "react-router-dom";
 // import { Alert } from '@material-ui/lab'
 
 const App: React.FC = () => {
@@ -139,45 +138,29 @@ const App: React.FC = () => {
   }, [getQuestionAnswers]); // getQuestionAnswersの変更時のみ実行（questionAnswersじゃダメだったわ）、それとこのエラーは何？？
 
   return (
-    <div className="container">
-      {qaSwitch ? (
-        <>
-          <Question question={question} />
-          <Answers
-            answers={answers}
-            check1={check1}
-            check2={check2}
-            check3={check3}
-            check4={check4}
-          />
-          <h2>{`${questionNumber}問目　現在の正解数: ${score}`}</h2>
-        </>
-      ) : (
-        <div className="answersContainer">
-          <h1>結果</h1>
-          <h2>問題数：{questionNumber}</h2>
-          <h2>正解数：{score}</h2>
-          <h2>正解率：{Math.round((score / questionNumber) * 100)}%</h2>
-          <div className="flex">
-            <Button variant="contained" color="primary">
-              <Twitter />
-              <span>結果をTweetする</span>
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => document.location.reload()}
-            >
-              初めからやり直す
-            </Button>
-          </div>
-        </div>
-      )}
-      <Form
-        questionAnswers={questionAnswers}
-        setQuestionAnswers={setQuestionAnswers}
-      />
-    </div>
+    <Router>
+      <Link to="/game">Game</Link>
+      <Link to="/form">Form</Link>
+      <div className="container">
+        {/* <Game
+          question={question}
+          answers={answers}
+          check1={check1}
+          check2={check2}
+          check3={check3}
+          check4={check4}
+          score={score}
+          questionNumber={questionNumber}
+          qaSwitch={qaSwitch}
+        ></Game>
+        <Form
+          questionAnswers={questionAnswers}
+          setQuestionAnswers={setQuestionAnswers}
+        /> */}
+      </div>
+      <Route exact path="/game" component={Game} />
+      <Route exact path="/form" component={Form} />
+    </Router>
   );
 };
 
