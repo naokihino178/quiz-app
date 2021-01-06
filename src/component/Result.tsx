@@ -12,9 +12,9 @@ const Result: React.FC<PROPS> = ({ score, questionNumber }) => {
   return (
     <div className="answersContainer">
       <h1>結果</h1>
-      <h2>問題数：{questionNumber}</h2>
-      <h2>正解数：{score}</h2>
-      <h2>正解率：{Math.round((score / questionNumber) * 100)}%</h2>
+      <h3>問題数：{questionNumber}</h3>
+      <h3>正解数：{score}</h3>
+      <h3>正解率：{Math.round((score / questionNumber) * 100)}%</h3>
       <div className="flexRow">
         <Button variant="contained" color="primary">
           <Twitter />

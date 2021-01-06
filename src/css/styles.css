@@ -1,9 +1,9 @@
 .container {
   width: 600px;
-  height: 550px;
+  height: 570px;
   margin: 0 auto;
   padding: 30px;
-  background: gray;
+  background: rgb(150, 150, 150);
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -17,9 +17,8 @@
 
 .answersContainer {
   width: 450px;
-  height: 325px;
+  height: 350px;
   padding: 30px;
-  background: rgb(150, 150, 150);
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -33,7 +32,13 @@
 }
 
 .flexRow {
+  width: 80%;
   display: flex;
   justify-content: space-around;
+}
 
+.formContainer {
+  width: 80%;
+  display: flex;
+  flex-flow: column;
 }
