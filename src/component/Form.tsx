@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 // questionAnswersの配列の型
@@ -38,58 +38,71 @@ const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers }) => {
     ]);
   };
   return (
-    <div>
-      <form>
-        <input
-          type="text"
-          placeholder="Question"
+    <>
+      <h2>問題の作成</h2>
+      <form className="formContainer" noValidate autoComplete="off">
+        <TextField
+          id="outlined-basic"
+          label="問題"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewQuestion(e.target.value);
           }}
         />
-        <input
-          type="text"
-          placeholder="Answer1"
+        <TextField
+          id="outlined-basic"
+          label="回答1"
+          size="small"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer1(e.target.value);
           }}
         />
-        <input
-          type="text"
-          placeholder="Answer2"
+        <TextField
+          id="outlined-basic"
+          label="回答2"
+          size="small"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer2(e.target.value);
           }}
         />
-        <input
-          type="text"
-          placeholder="Answer3"
+        <TextField
+          id="outlined-basic"
+          label="回答3"
+          size="small"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer3(e.target.value);
           }}
         />
-        <input
-          type="text"
-          placeholder="Answer4"
+        <TextField
+          id="outlined-basic"
+          label="回答4"
+          size="small"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer4(e.target.value);
           }}
         />
-        <input
-          type="text"
-          placeholder="correctAnswer"
+        <TextField
+          id="outlined-basic"
+          label="正解の回答"
+          color="secondary"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewCorrectAnswer(e.target.value);
           }}
         />
-        <button type="submit" onClick={addQuestionAnswers}>
-          登録
-        </button>
       </form>
-      <Button variant="contained" component={Link} to="/">
-        メニューへ戻る
-      </Button>
-    </div>
+      <div className="flexRow">
+        <Button
+          color="primary"
+          variant="contained"
+          type="submit"
+          onClick={addQuestionAnswers}
+        >
+          登録
+        </Button>
+        <Button variant="contained" component={Link} to="/">
+          メニューへ戻る
+        </Button>
+      </div>
+    </>
   );
 };
 

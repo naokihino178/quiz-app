@@ -26,7 +26,7 @@ const Game: React.FC<PROPS> = ({
 }) => {
   return (
     <div className="flexColumn">
-      <h1>{question}</h1>
+      <h1>{`Q${questionNumber}: ${question}`}</h1>
       <Answers
         answers={answers}
         check1={check1}
@@ -34,7 +34,6 @@ const Game: React.FC<PROPS> = ({
         check3={check3}
         check4={check4}
       />
-      <h2>{`${questionNumber}問目　現在の正解数: ${score}`}</h2>
       <div className="flexRow">
         <Button
           variant="contained"
@@ -43,7 +42,6 @@ const Game: React.FC<PROPS> = ({
         >
           はじめからやり直す
         </Button>
-
         <Button variant="contained" component={Link} to="/">
           メニューへ戻る
         </Button>

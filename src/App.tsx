@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./css/styles.css";
 import Main from "./component/Main";
 import Form from "./component/Form";
-import Start from "./component/Menu";
+import Menu from "./component/Menu"
 
 // import { Alert } from "@material-ui/lab";
 // import { Create } from "@material-ui/icons";
@@ -142,7 +142,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="container">
-        <Route exact path="/" component={Start} />
+        <Route exact path="/" component={Menu} />
         <Route
           exact
           path="/main"
