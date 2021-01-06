@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./css/styles.css";
-import Game from "./component/Game";
+import Main from "./component/Main";
 import Form from "./component/Form";
+import Start from "./component/Menu";
+
 // import { Alert } from "@material-ui/lab";
 // import { Create } from "@material-ui/icons";
-import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 // import { Alert } from '@material-ui/lab'
 
 const App: React.FC = () => {
@@ -139,27 +141,36 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <Link to="/game">Game</Link>
-      <Link to="/form">Form</Link>
       <div className="container">
-        {/* <Game
-          question={question}
-          answers={answers}
-          check1={check1}
-          check2={check2}
-          check3={check3}
-          check4={check4}
-          score={score}
-          questionNumber={questionNumber}
-          qaSwitch={qaSwitch}
-        ></Game>
-        <Form
-          questionAnswers={questionAnswers}
-          setQuestionAnswers={setQuestionAnswers}
-        /> */}
+        <Route exact path="/" component={Start} />
+        <Route
+          exact
+          path="/main"
+          render={() => (
+            <Main
+              question={question}
+              answers={answers}
+              check1={check1}
+              check2={check2}
+              check3={check3}
+              check4={check4}
+              score={score}
+              questionNumber={questionNumber}
+              qaSwitch={qaSwitch}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/form"
+          render={() => (
+            <Form
+              questionAnswers={questionAnswers}
+              setQuestionAnswers={setQuestionAnswers}
+            />
+          )}
+        />
       </div>
-      <Route exact path="/game" component={Game} />
-      <Route exact path="/form" component={Form} />
     </Router>
   );
 };

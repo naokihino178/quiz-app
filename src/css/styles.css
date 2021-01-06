@@ -11,13 +11,13 @@
 }
 
 .buttonSize {
-  width: 400px;
+  width: 100%;
   height: 50px;
 }
 
 .answersContainer {
-  width: 90%;
-  height: 400px;
+  width: 450px;
+  height: 325px;
   padding: 30px;
   background: rgb(150, 150, 150);
   display: flex;
@@ -26,8 +26,14 @@
   justify-content: space-around;
 }
 
-.flex {
-  width: 65%;
+.flexColumn {
   display: flex;
-  justify-content: space-between;
+  flex-flow: column;
+  align-items: center;
+}
+
+.flexRow {
+  display: flex;
+  justify-content: space-around;
+
 }
