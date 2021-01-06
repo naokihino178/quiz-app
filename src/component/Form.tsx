@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 // questionAnswersの配列の型
 interface QUESTIONANSWERS {
@@ -84,6 +86,9 @@ const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers }) => {
           登録
         </button>
       </form>
+      <Button variant="contained" component={Link} to="/">
+        メニューへ戻る
+      </Button>
     </div>
   );
 };

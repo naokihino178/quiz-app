@@ -1,6 +1,6 @@
 import React from "react";
-import Question from "./Question";
-import Answers from "./Answers";
+import Game from "./Game";
+import Result from "./Result";
 
 interface PROPS {
   question: string;
@@ -11,6 +11,7 @@ interface PROPS {
   check4: VoidFunction;
   score: number;
   questionNumber: number;
+  qaSwitch: boolean;
 }
 
 const Main: React.FC<PROPS> = ({
@@ -22,18 +23,26 @@ const Main: React.FC<PROPS> = ({
   check4,
   score,
   questionNumber,
+  qaSwitch,
 }) => {
   return (
     <div>
-      <Question question={question} />
-      <Answers
-        answers={answers}
-        check1={check1}
-        check2={check2}
-        check3={check3}
-        check4={check4}
-      />
-      <h2>{`${questionNumber}問目　現在の正解数: ${score}`}</h2>
+      {qaSwitch ? (
+        <>
+          <Game
+            question={question}
+            answers={answers}
+            check1={check1}
+            check2={check2}
+            check3={check3}
+            check4={check4}
+            score={score}
+            questionNumber={questionNumber}
+          />
+        </>
+      ) : (
+        <Result score={score} questionNumber={questionNumber} />
+      )}
     </div>
   );
 };
