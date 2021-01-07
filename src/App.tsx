@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./css/styles.css";
 import Main from "./component/Main";
 import Form from "./component/Form";
-import Menu from "./component/Menu"
+import Menu from "./component/Menu";
 
 // import { Alert } from "@material-ui/lab";
 // import { Create } from "@material-ui/icons";
@@ -45,9 +45,9 @@ const App: React.FC = () => {
   ]);
 
   const [getQuestionAnswers, setGetQuestionAnswers] = useState({
-    question: "初期値",
-    answers: ["1初期値", "2初期値", "3初期値", "4初期値"],
-    correctAnswer: "1初期値",
+    question: "",
+    answers: ["", "", "", ""],
+    correctAnswer: "",
   });
 
   const [score, setScore] = useState(0);
@@ -142,7 +142,11 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="container">
-        <Route exact path="/" component={Menu} />
+        <Route
+          exact
+          path="/"
+          render={() => <Menu changeQuestions={changeQuestions} />}
+        />
         <Route
           exact
           path="/main"

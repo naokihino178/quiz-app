@@ -11,7 +11,7 @@ interface QUESTIONANSWERS {
 // Propsの型
 interface PROPS {
   questionAnswers: Array<QUESTIONANSWERS>;
-  setQuestionAnswers: React.Dispatch<React.SetStateAction<QUESTIONANSWERS[]>>; // 後でちゃんとしとく
+  setQuestionAnswers: React.Dispatch<React.SetStateAction<QUESTIONANSWERS[]>>; 
 }
 
 const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers }) => {
