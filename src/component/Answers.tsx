@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@material-ui/core";
 // Propsの型
 interface PROPS {
-  answers: string[];
+  answers: string[]|null;
   check1: VoidFunction;
   check2: VoidFunction;
   check3: VoidFunction;
@@ -25,7 +25,7 @@ const Answers: React.FC<PROPS> = ({
         onClick={check1}
         id="button1"
       >
-        {answers[0]}
+        {answers![0]}
       </Button>
       <Button
         variant="contained"
@@ -34,7 +34,7 @@ const Answers: React.FC<PROPS> = ({
         onClick={check2}
         id="button2"
       >
-        {answers[1]}
+        {answers![1]}
       </Button>
       <Button
         variant="contained"
@@ -43,7 +43,7 @@ const Answers: React.FC<PROPS> = ({
         onClick={check3}
         id="button3"
       >
-        {answers[2]}
+        {answers![2]}
       </Button>
       <Button
         variant="contained"
@@ -52,7 +52,7 @@ const Answers: React.FC<PROPS> = ({
         onClick={check4}
         id="button4"
       >
-        {answers[3]}
+        {answers![3]}
       </Button>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./css/styles.css";
 import Main from "./component/Main";
 import Form from "./component/Form";
@@ -7,7 +7,6 @@ import Menu from "./component/Menu";
 // import { Alert } from "@material-ui/lab";
 // import { Create } from "@material-ui/icons";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// import { Alert } from '@material-ui/lab'
 
 const App: React.FC = () => {
   interface QUESTIONANSWERS {
@@ -16,7 +15,15 @@ const App: React.FC = () => {
     correctAnswer: string;
   }
 
-  const [questionAnswers, setQuestionAnswers] = useState<QUESTIONANSWERS[]>([
+  interface GETQUESTIONANSWERS {
+    question: string;
+    answers: string[];
+    correctAnswer: string;
+  }
+
+  const [questionAnswers, setQuestionAnswers] = useState<
+    QUESTIONANSWERS[] | any
+  >([
     {
       question: "apple",
       answers: ["1リンゴ", "2バナナ", "3ブドウ", "4モモ"],
@@ -44,38 +51,45 @@ const App: React.FC = () => {
     },
   ]);
 
-  const [getQuestionAnswers, setGetQuestionAnswers] = useState({
+  const [getQuestionAnswers, setGetQuestionAnswers] = useState<
+    GETQUESTIONANSWERS | any
+  >({
     question: "",
-    answers: ["", "", "", ""],
+    answers: [""],
     correctAnswer: "",
   });
 
   const [score, setScore] = useState(0);
-  const [questionNumber, setQuestionNumber] = useState(1);
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [restQuestions, setRestQuestions] = useState(questionAnswers.length);
   const [qaSwitch, setQaSwitch] = useState(true);
 
-  const question = getQuestionAnswers.question;
-  const answers = getQuestionAnswers.answers;
+  const question = getQuestionAnswers.question
+  const answers = getQuestionAnswers.answers
 
   const changeQuestions = () => {
-    //　様々な問題+回答が入った配列をシャッフル
-    for (let i = questionAnswers.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const tmp = questionAnswers[i];
-      questionAnswers[i] = questionAnswers[j];
-      questionAnswers[j] = tmp;
+    if (questionAnswers.length > 0) {
+      //　様々な問題+回答が入った配列をシャッフル
+      for (let i = questionAnswers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = questionAnswers[i];
+        questionAnswers[i] = questionAnswers[j];
+        questionAnswers[j] = tmp;
+      }
+      // 変数nextAnswersにシャッフルした配列の一番上のオブジェクトのanswersを代入
+      const nextAnswers = questionAnswers[0].answers;
+      // nextAnswersをシャッフル
+      for (let i = nextAnswers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = nextAnswers[i];
+        nextAnswers[i] = nextAnswers[j];
+        nextAnswers[j] = tmp;
+      }
+      // getQuestionsAnswersにquestionsAnswerdの一番上のオブジェクト（Answersシャッフル済み）を代入
+      setGetQuestionAnswers(questionAnswers.shift()!);
+      setQuestionNumber(questionNumber + 1);
     }
-    // 変数nextAnswersにシャッフルした配列の一番上のオブジェクトのanswersを代入
-    const nextAnswers = questionAnswers[0].answers;
-    // nextAnswersをシャッフル
-    for (let i = nextAnswers.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const tmp = nextAnswers[i];
-      nextAnswers[i] = nextAnswers[j];
-      nextAnswers[j] = tmp;
-    }
-    // getQuestionsAnswersにquestionsAnswerdの一番上のオブジェクト（Answersシャッフル済み）を代入
-    setGetQuestionAnswers(questionAnswers.shift()!);
+    setRestQuestions(restQuestions - 1);
   };
 
   const check1 = () => {
@@ -84,10 +98,8 @@ const App: React.FC = () => {
       getQuestionAnswers.correctAnswer
     ) {
       setScore(score + 1);
-      setQuestionNumber(questionNumber + 1);
       changeQuestions();
     } else {
-      setQuestionNumber(questionNumber + 1);
       changeQuestions();
     }
   };
@@ -97,10 +109,8 @@ const App: React.FC = () => {
       getQuestionAnswers.correctAnswer
     ) {
       setScore(score + 1);
-      setQuestionNumber(questionNumber + 1);
       changeQuestions();
     } else {
-      setQuestionNumber(questionNumber + 1);
       changeQuestions();
     }
   };
@@ -110,10 +120,8 @@ const App: React.FC = () => {
       getQuestionAnswers.correctAnswer
     ) {
       setScore(score + 1);
-      setQuestionNumber(questionNumber + 1);
       changeQuestions();
     } else {
-      setQuestionNumber(questionNumber + 1);
       changeQuestions();
     }
   };
@@ -123,21 +131,18 @@ const App: React.FC = () => {
       getQuestionAnswers.correctAnswer
     ) {
       setScore(score + 1);
-      setQuestionNumber(questionNumber + 1);
       changeQuestions();
     } else {
-      setQuestionNumber(questionNumber + 1);
       changeQuestions();
     }
   };
   console.log(questionAnswers.length); // 最後に二回0が表示されるのはなぜ？？
 
-  useEffect(() => {
-    if (questionAnswers.length < 1) {
-      setQaSwitch(false);
-      // alert(`終了！ ${score * 10}点！`);
-    }
-  }, [getQuestionAnswers]); // getQuestionAnswersの変更時のみ実行（questionAnswersじゃダメだったわ）、それとこのエラーは何？？
+  if (restQuestions < 0) {
+    setQaSwitch(false);
+    setRestQuestions(0);
+    // alert(`終了！ ${score * 10}点！`);
+  }
 
   return (
     <Router>
