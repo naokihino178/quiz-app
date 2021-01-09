@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 interface PROPS {
   score: number;
   questionNumber: number;
+  resetQuestionAnswers: VoidFunction;
 }
 
-const Result: React.FC<PROPS> = ({ score, questionNumber }) => {
+const Result: React.FC<PROPS> = ({ score, questionNumber, resetQuestionAnswers }) => {
   return (
     <div className="answersContainer">
       <h1>結果</h1>
@@ -21,7 +22,7 @@ const Result: React.FC<PROPS> = ({ score, questionNumber }) => {
           <span>結果をTweetする</span>
         </Button>
       </div>
-      <Button variant="contained" component={Link} to="/">
+      <Button variant="contained" component={Link} to="/" onClick={resetQuestionAnswers}>
         メニューへ戻る
       </Button>
     </div>
