@@ -59,13 +59,17 @@ const App: React.FC = () => {
     correctAnswer: "",
   });
 
+  const [finishedQuestionAnswers, setFinishedQuestionAnswers] = useState<
+    QUESTIONANSWERS[] | any
+  >([]);
+
   const [score, setScore] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(0);
   const [restQuestions, setRestQuestions] = useState(questionAnswers.length);
   const [qaSwitch, setQaSwitch] = useState(true);
 
-  const question = getQuestionAnswers.question
-  const answers = getQuestionAnswers.answers
+  const question = getQuestionAnswers.question;
+  const answers = getQuestionAnswers.answers;
 
   const changeQuestions = () => {
     if (questionAnswers.length > 0) {
@@ -90,6 +94,13 @@ const App: React.FC = () => {
       setQuestionNumber(questionNumber + 1);
     }
     setRestQuestions(restQuestions - 1);
+    if (questionAnswers.length < 4) { // ここを問題が増えても大丈夫なようにする
+      // （初回の空文字以外）現在のgetQuestionAnswersをfinishedQuestionAnswersに代入
+      setFinishedQuestionAnswers([
+        ...finishedQuestionAnswers,
+        getQuestionAnswers,
+      ]);
+    }
   };
 
   const check1 = () => {
@@ -137,12 +148,21 @@ const App: React.FC = () => {
     }
   };
   console.log(questionAnswers.length); // 最後に二回0が表示されるのはなぜ？？
+  console.log(finishedQuestionAnswers);
 
   if (restQuestions < 0) {
     setQaSwitch(false);
-    setRestQuestions(0);
-    // alert(`終了！ ${score * 10}点！`);
+    setQuestionAnswers(finishedQuestionAnswers);
+    setRestQuestions(questionAnswers.length);
   }
+  const resetQuestionAnswers = () => {
+    setQuestionAnswers(finishedQuestionAnswers);
+    setFinishedQuestionAnswers([])
+    setQuestionNumber(0);
+    setScore(0);
+    setQaSwitch(true);
+    setRestQuestions(questionAnswers.length);
+  };
 
   return (
     <Router>
@@ -166,6 +186,7 @@ const App: React.FC = () => {
               score={score}
               questionNumber={questionNumber}
               qaSwitch={qaSwitch}
+              resetQuestionAnswers={resetQuestionAnswers}
             />
           )}
         />
