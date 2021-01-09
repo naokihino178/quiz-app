@@ -35,13 +35,6 @@ const Game: React.FC<PROPS> = ({
         check4={check4}
       />
       <div className="flexRow">
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => document.location.reload()}
-        >
-          はじめからやり直す
-        </Button>
         <Button variant="contained" component={Link} to="/">
           メニューへ戻る
         </Button>

@@ -20,13 +20,6 @@ const Result: React.FC<PROPS> = ({ score, questionNumber }) => {
           <Twitter />
           <span>結果をTweetする</span>
         </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => document.location.reload()}
-        >
-          はじめからやり直す
-        </Button>
       </div>
       <Button variant="contained" component={Link} to="/">
         メニューへ戻る
