@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
 // questionAnswersの配列の型
 interface QUESTIONANSWERS {
   question: string;
@@ -11,7 +10,7 @@ interface QUESTIONANSWERS {
 // Propsの型
 interface PROPS {
   questionAnswers: Array<QUESTIONANSWERS>;
-  setQuestionAnswers: React.Dispatch<React.SetStateAction<QUESTIONANSWERS[]>>; 
+  setQuestionAnswers: React.Dispatch<React.SetStateAction<QUESTIONANSWERS[]>>;
 }
 
 const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers }) => {
@@ -38,7 +37,7 @@ const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers }) => {
     ]);
   };
   return (
-    <>
+    <div　className="answersContainer">
       <h2>問題の作成</h2>
       <form className="formContainer" noValidate autoComplete="off">
         <TextField
@@ -102,7 +101,7 @@ const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers }) => {
           メニューへ戻る
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 
