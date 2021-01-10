@@ -25,9 +25,9 @@ const Menu: React.FC<PROPS> = ({ changeQuestions }) => {
           color="secondary"
           variant="contained"
           component={Link}
-          to="/form"
+          to="/edit"
         >
-          問題を作成する
+          問題を編集する
         </Button>
       </div>
     </>

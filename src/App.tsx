@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./css/styles.css";
 import Main from "./component/Main";
-import Form from "./component/Form";
+import Edit from "./component/Edit";
 import Menu from "./component/Menu";
+import Form from "./component/Form"
 
 // import { Alert } from "@material-ui/lab";
 // import { Create } from "@material-ui/icons";
@@ -25,29 +26,29 @@ const App: React.FC = () => {
     QUESTIONANSWERS[] | any
   >([
     {
-      question: "apple",
-      answers: ["1リンゴ", "2バナナ", "3ブドウ", "4モモ"],
-      correctAnswer: "1リンゴ",
+      question: "ニュートンが万有引力に気づいたきっかけの果実は？",
+      answers: ["リンゴ", "バナナ", "ブドウ", "モモ"],
+      correctAnswer: "リンゴ",
     },
     {
-      question: "fox",
-      answers: ["1キツネ", "2タヌキ", "3クマ", "4ライオン"],
-      correctAnswer: "1キツネ",
+      question: "スマブラに出てくるのは？",
+      answers: ["キツネ", "タヌキ", "クマ", "ライオン"],
+      correctAnswer: "キツネ",
     },
     {
-      question: "guitar",
-      answers: ["1ギター", "2ベース", "3ドラム", "4シタール"],
-      correctAnswer: "1ギター",
+      question: "一般的に弦が6本なのは？",
+      answers: ["ギター", "ベース", "ドラム", "シタール"],
+      correctAnswer: "ギター",
     },
     {
-      question: "red",
-      answers: ["1赤", "2青", "3緑", "4黒"],
-      correctAnswer: "1赤",
+      question: "日本の国旗に使われている色は？",
+      answers: ["赤", "青", "緑", "黒"],
+      correctAnswer: "赤",
     },
     {
-      question: "car",
-      answers: ["1車", "2電車", "3飛行機", "4バス"],
-      correctAnswer: "1車",
+      question: "最も重量が軽いのは？",
+      answers: ["車", "電車", "飛行機", "船"],
+      correctAnswer: "車",
     },
   ]);
 
@@ -94,7 +95,8 @@ const App: React.FC = () => {
       setQuestionNumber(questionNumber + 1);
     }
     setRestQuestions(restQuestions - 1);
-    if (questionAnswers.length < 4) { // ここを問題が増えても大丈夫なようにする
+    if (questionAnswers.length < 4) {
+      // ここを問題が増えても大丈夫なようにする
       // （初回の空文字以外）現在のgetQuestionAnswersをfinishedQuestionAnswersに代入
       setFinishedQuestionAnswers([
         ...finishedQuestionAnswers,
@@ -157,7 +159,7 @@ const App: React.FC = () => {
   }
   const resetQuestionAnswers = () => {
     setQuestionAnswers(finishedQuestionAnswers);
-    setFinishedQuestionAnswers([])
+    setFinishedQuestionAnswers([]);
     setQuestionNumber(0);
     setScore(0);
     setQaSwitch(true);
@@ -187,6 +189,15 @@ const App: React.FC = () => {
               questionNumber={questionNumber}
               qaSwitch={qaSwitch}
               resetQuestionAnswers={resetQuestionAnswers}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/edit"
+          render={() => (
+            <Edit
+              questionAnswers={questionAnswers}
             />
           )}
         />
