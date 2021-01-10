@@ -13,6 +13,7 @@ interface PROPS {
   questionNumber: number;
   qaSwitch: boolean;
   resetQuestionAnswers: VoidFunction;
+  restartQuestionAnswers: VoidFunction;
 }
 
 const Main: React.FC<PROPS> = ({
@@ -26,6 +27,7 @@ const Main: React.FC<PROPS> = ({
   questionNumber,
   qaSwitch,
   resetQuestionAnswers,
+  restartQuestionAnswers,
 }) => {
   return (
     <div>
@@ -40,10 +42,15 @@ const Main: React.FC<PROPS> = ({
             check4={check4}
             score={score}
             questionNumber={questionNumber}
+            restartQuestionAnswers={restartQuestionAnswers}
           />
         </>
       ) : (
-        <Result score={score} questionNumber={questionNumber} resetQuestionAnswers={resetQuestionAnswers} />
+        <Result
+          score={score}
+          questionNumber={questionNumber}
+          resetQuestionAnswers={resetQuestionAnswers}
+        />
       )}
     </div>
   );
