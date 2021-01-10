@@ -11,9 +11,10 @@ interface QUESTIONANSWERS {
 interface PROPS {
   questionAnswers: Array<QUESTIONANSWERS>;
   setQuestionAnswers: React.Dispatch<React.SetStateAction<QUESTIONANSWERS[]>>;
+  resetQuestionAnswers:VoidFunction;
 }
 
-const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers }) => {
+const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers, resetQuestionAnswers }) => {
   const [newQuestion, setNewQuestion] = useState(""); // これは自動型付けでstringになっているはずだが、numberの可能性はないのか？（実際エラーにはならないが、TSは検知してくれないのか？）
   const [newAnswer1, setNewAnswer1] = useState("");
   const [newAnswer2, setNewAnswer2] = useState("");
@@ -97,7 +98,7 @@ const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers }) => {
         >
           登録
         </Button>
-        <Button variant="contained" component={Link} to="/">
+        <Button variant="contained" component={Link} to="/" onClick={resetQuestionAnswers}>
           メニューへ戻る
         </Button>
       </div>

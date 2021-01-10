@@ -11,9 +11,10 @@ interface QUESTIONANSWERS {
 // Propsの型
 interface PROPS {
   questionAnswers: Array<QUESTIONANSWERS>;
+  resetQuestionAnswers: VoidFunction;
 }
 
-const Edit: React.FC<PROPS> = ({ questionAnswers }) => {
+const Edit: React.FC<PROPS> = ({ questionAnswers, resetQuestionAnswers }) => {
   return (
     <div className="textAlignLeft">
       <h2>作成した問題</h2>
@@ -33,7 +34,12 @@ const Edit: React.FC<PROPS> = ({ questionAnswers }) => {
         問題を作成する
       </Button>
 
-      <Button variant="contained" component={Link} to="/">
+      <Button
+        variant="contained"
+        component={Link}
+        to="/"
+        onClick={resetQuestionAnswers}
+      >
         メニューへ戻る
       </Button>
     </div>

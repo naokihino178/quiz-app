@@ -3,7 +3,7 @@ import "./css/styles.css";
 import Main from "./component/Main";
 import Edit from "./component/Edit";
 import Menu from "./component/Menu";
-import Form from "./component/Form"
+import Form from "./component/Form";
 
 // import { Alert } from "@material-ui/lab";
 // import { Create } from "@material-ui/icons";
@@ -26,7 +26,7 @@ const App: React.FC = () => {
     QUESTIONANSWERS[] | any
   >([
     {
-      question: "ニュートンが万有引力に気づいたきっかけの果実は？",
+      question: "リュークが食べている果実は？",
       answers: ["リンゴ", "バナナ", "ブドウ", "モモ"],
       correctAnswer: "リンゴ",
     },
@@ -95,9 +95,8 @@ const App: React.FC = () => {
       setQuestionNumber(questionNumber + 1);
     }
     setRestQuestions(restQuestions - 1);
-    if (questionAnswers.length < 4) {
-      // ここを問題が増えても大丈夫なようにする
-      // （初回の空文字以外）現在のgetQuestionAnswersをfinishedQuestionAnswersに代入
+    if (questionNumber !== 0) {
+      // 初回の空文字（questionNumber = 0）の時以外、現在のgetQuestionAnswersをfinishedQuestionAnswersに代入
       setFinishedQuestionAnswers([
         ...finishedQuestionAnswers,
         getQuestionAnswers,
@@ -149,21 +148,33 @@ const App: React.FC = () => {
       changeQuestions();
     }
   };
-  console.log(questionAnswers.length); // 最後に二回0が表示されるのはなぜ？？
-  console.log(finishedQuestionAnswers);
+  console.log(`questionAnswers.length: ${questionAnswers.length}`); // 最後に二回0が表示されるのはなぜ？？
+  console.log(`questionAnswers: ${questionAnswers}`);
+  console.log(`getQuestionAnswers: ${getQuestionAnswers}`);
+  console.log(`finishedQuestionAnswers: ${finishedQuestionAnswers}`);
+  console.log(`questionNumber: ${questionNumber}`);
+  console.log(`restQuestions: ${restQuestions}`);
 
   if (restQuestions < 0) {
     setQaSwitch(false);
-    setQuestionAnswers(finishedQuestionAnswers);
     setRestQuestions(questionAnswers.length);
   }
   const resetQuestionAnswers = () => {
-    setQuestionAnswers(finishedQuestionAnswers);
+    setQuestionAnswers([...questionAnswers, ...finishedQuestionAnswers]);
     setFinishedQuestionAnswers([]);
     setQuestionNumber(0);
     setScore(0);
     setQaSwitch(true);
-    setRestQuestions(questionAnswers.length);
+    setRestQuestions(questionAnswers.length + finishedQuestionAnswers.length);
+  };
+
+  const restartQuestionAnswers = () => {
+    setQuestionAnswers([...questionAnswers, getQuestionAnswers, ...finishedQuestionAnswers]);
+    setFinishedQuestionAnswers([]);
+    setQuestionNumber(0);
+    setScore(0);
+    setQaSwitch(true);
+    setRestQuestions(questionAnswers.length + 1 + finishedQuestionAnswers.length);
   };
 
   return (
@@ -189,6 +200,7 @@ const App: React.FC = () => {
               questionNumber={questionNumber}
               qaSwitch={qaSwitch}
               resetQuestionAnswers={resetQuestionAnswers}
+              restartQuestionAnswers={restartQuestionAnswers}
             />
           )}
         />
@@ -198,6 +210,7 @@ const App: React.FC = () => {
           render={() => (
             <Edit
               questionAnswers={questionAnswers}
+              resetQuestionAnswers={resetQuestionAnswers}
             />
           )}
         />
@@ -208,6 +221,7 @@ const App: React.FC = () => {
             <Form
               questionAnswers={questionAnswers}
               setQuestionAnswers={setQuestionAnswers}
+              resetQuestionAnswers={resetQuestionAnswers}
             />
           )}
         />

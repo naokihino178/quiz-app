@@ -12,6 +12,7 @@ interface PROPS {
   check4: VoidFunction;
   score: number;
   questionNumber: number;
+  restartQuestionAnswers: VoidFunction;
 }
 
 const Game: React.FC<PROPS> = ({
@@ -23,6 +24,7 @@ const Game: React.FC<PROPS> = ({
   check4,
   score,
   questionNumber,
+  restartQuestionAnswers,
 }) => {
   return (
     <div className="flexColumn">
@@ -35,7 +37,12 @@ const Game: React.FC<PROPS> = ({
         check4={check4}
       />
       <div className="flexRow">
-        <Button variant="contained" component={Link} to="/">
+        <Button
+          variant="contained"
+          component={Link}
+          to="/"
+          onClick={restartQuestionAnswers}
+        >
           メニューへ戻る
         </Button>
       </div>
