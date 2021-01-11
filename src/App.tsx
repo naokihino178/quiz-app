@@ -14,6 +14,7 @@ const App: React.FC = () => {
     question: string;
     answers: string[];
     correctAnswer: string;
+    id: number|string;
   }
 
   interface GETQUESTIONANSWERS {
@@ -29,26 +30,19 @@ const App: React.FC = () => {
       question: "リュークが食べている果実は？",
       answers: ["リンゴ", "バナナ", "ブドウ", "モモ"],
       correctAnswer: "リンゴ",
+      id: Math.random().toString(32).substring(2),
     },
     {
       question: "スマブラに出てくるのは？",
       answers: ["キツネ", "タヌキ", "クマ", "ライオン"],
       correctAnswer: "キツネ",
+      id: Math.random().toString(32).substring(2),
     },
     {
       question: "一般的に弦が6本なのは？",
       answers: ["ギター", "ベース", "ドラム", "シタール"],
       correctAnswer: "ギター",
-    },
-    {
-      question: "日本の国旗に使われている色は？",
-      answers: ["赤", "青", "緑", "黒"],
-      correctAnswer: "赤",
-    },
-    {
-      question: "最も重量が軽いのは？",
-      answers: ["車", "電車", "飛行機", "船"],
-      correctAnswer: "車",
+      id: Math.random().toString(32).substring(2),
     },
   ]);
 
@@ -169,12 +163,25 @@ const App: React.FC = () => {
   };
 
   const restartQuestionAnswers = () => {
-    setQuestionAnswers([...questionAnswers, getQuestionAnswers, ...finishedQuestionAnswers]);
+    setQuestionAnswers([
+      ...questionAnswers,
+      getQuestionAnswers,
+      ...finishedQuestionAnswers,
+    ]);
     setFinishedQuestionAnswers([]);
     setQuestionNumber(0);
     setScore(0);
     setQaSwitch(true);
-    setRestQuestions(questionAnswers.length + 1 + finishedQuestionAnswers.length);
+    setRestQuestions(
+      questionAnswers.length + 1 + finishedQuestionAnswers.length
+    );
+  };
+
+  const deleteQuestionAnswers = (id: number) => {
+    alert("削除します");
+    setQuestionAnswers(
+      questionAnswers.filter((questionAnswer: QUESTIONANSWERS) => (questionAnswer.id !== id))
+    );
   };
 
   return (
@@ -211,6 +218,7 @@ const App: React.FC = () => {
             <Edit
               questionAnswers={questionAnswers}
               resetQuestionAnswers={resetQuestionAnswers}
+              deleteQuestionAnswers={deleteQuestionAnswers}
             />
           )}
         />

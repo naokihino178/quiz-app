@@ -6,6 +6,7 @@ interface QUESTIONANSWERS {
   question: string;
   answers: string[];
   correctAnswer: string;
+  id: number|string;
 }
 // Propsの型
 interface PROPS {
@@ -34,6 +35,7 @@ const Form: React.FC<PROPS> = ({ questionAnswers, setQuestionAnswers, resetQuest
         question: newQuestion,
         answers: [newAnswer1, newAnswer2, newAnswer3, newAnswer4],
         correctAnswer: newCorrectAnswer,
+        id: Math.random().toString(32).substring(2),
       },
     ]);
   };
