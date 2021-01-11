@@ -14,7 +14,7 @@ const App: React.FC = () => {
     question: string;
     answers: string[];
     correctAnswer: string;
-    id: number|string;
+    id: number | string;
   }
 
   interface GETQUESTIONANSWERS {
@@ -177,10 +177,51 @@ const App: React.FC = () => {
     );
   };
 
+  const [newQuestion, setNewQuestion] = useState(""); // これは自動型付けでstringになっているはずだが、numberの可能性はないのか？（実際エラーにはならないが、TSは検知してくれないのか？）
+  const [newAnswer1, setNewAnswer1] = useState("");
+  const [newAnswer2, setNewAnswer2] = useState("");
+  const [newAnswer3, setNewAnswer3] = useState("");
+  const [newAnswer4, setNewAnswer4] = useState("");
+  const [newCorrectAnswer, setNewCorrectAnswer] = useState("");
+  // 新たな問題と回答を追加する処理
+  const addQuestionAnswers = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    alert("問題を追加します");
+    e.preventDefault();
+
+    setQuestionAnswers([
+      ...questionAnswers,
+      {
+        question: newQuestion,
+        answers: [newAnswer1, newAnswer2, newAnswer3, newAnswer4],
+        correctAnswer: newCorrectAnswer,
+        id: Math.random().toString(32).substring(2),
+      },
+    ]);
+    setNewQuestion("");
+    setNewAnswer1("");
+    setNewAnswer2("");
+    setNewAnswer3("");
+    setNewAnswer4("");
+    setNewCorrectAnswer("");
+  };
+
+  // const editQuestionAnswers = () => {
+  //   setNewQuestion("a")
+  //   setNewAnswer1("a")
+  //   setNewAnswer2("a")
+  //   setNewAnswer3("a")
+  //   setNewAnswer4("a")
+  //   setNewCorrectAnswer("a")
+  // };
+
   const deleteQuestionAnswers = (id: number) => {
     alert("削除します");
     setQuestionAnswers(
-      questionAnswers.filter((questionAnswer: QUESTIONANSWERS) => (questionAnswer.id !== id))
+      questionAnswers.filter(
+        (questionAnswer: QUESTIONANSWERS) => questionAnswer.id !== id
+      )
     );
   };
 
@@ -218,7 +259,20 @@ const App: React.FC = () => {
             <Edit
               questionAnswers={questionAnswers}
               resetQuestionAnswers={resetQuestionAnswers}
+              // editQuestionAnswers={editQuestionAnswers}
               deleteQuestionAnswers={deleteQuestionAnswers}
+              newQuestion={newQuestion}
+              newAnswer1={newAnswer1}
+              newAnswer2={newAnswer2}
+              newAnswer3={newAnswer3}
+              newAnswer4={newAnswer4}
+              newCorrectAnswer={newCorrectAnswer}
+              setNewQuestion={setNewQuestion}
+              setNewAnswer1={setNewAnswer1}
+              setNewAnswer2={setNewAnswer2}
+              setNewAnswer3={setNewAnswer3}
+              setNewAnswer4={setNewAnswer4}
+              setNewCorrectAnswer={setNewCorrectAnswer}
             />
           )}
         />
@@ -230,6 +284,19 @@ const App: React.FC = () => {
               questionAnswers={questionAnswers}
               setQuestionAnswers={setQuestionAnswers}
               resetQuestionAnswers={resetQuestionAnswers}
+              newQuestion={newQuestion}
+              newAnswer1={newAnswer1}
+              newAnswer2={newAnswer2}
+              newAnswer3={newAnswer3}
+              newAnswer4={newAnswer4}
+              newCorrectAnswer={newCorrectAnswer}
+              setNewQuestion={setNewQuestion}
+              setNewAnswer1={setNewAnswer1}
+              setNewAnswer2={setNewAnswer2}
+              setNewAnswer3={setNewAnswer3}
+              setNewAnswer4={setNewAnswer4}
+              setNewCorrectAnswer={setNewCorrectAnswer}
+              addQuestionAnswers={addQuestionAnswers}
             />
           )}
         />
