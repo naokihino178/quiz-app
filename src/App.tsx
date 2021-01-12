@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/styles.css";
 import Main from "./component/Main";
 import Edit from "./component/Edit";
 import Menu from "./component/Menu";
 import Form from "./component/Form";
-
+import { db } from "./firebase"; // firebase.tsから、 const db = firebaseApp.firestore()
 // import { Alert } from "@material-ui/lab";
-// import { Create } from "@material-ui/icons";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -14,7 +13,7 @@ const App: React.FC = () => {
     question: string;
     answers: string[];
     correctAnswer: string;
-    id: number | string;
+    // id: number | string;
   }
 
   interface GETQUESTIONANSWERS {
@@ -25,26 +24,7 @@ const App: React.FC = () => {
 
   const [questionAnswers, setQuestionAnswers] = useState<
     QUESTIONANSWERS[] | any
-  >([
-    {
-      question: "リュークが食べている果実は？",
-      answers: ["リンゴ", "バナナ", "ブドウ", "モモ"],
-      correctAnswer: "リンゴ",
-      id: Math.random().toString(32).substring(2),
-    },
-    {
-      question: "スマブラに出てくるのは？",
-      answers: ["キツネ", "タヌキ", "クマ", "ライオン"],
-      correctAnswer: "キツネ",
-      id: Math.random().toString(32).substring(2),
-    },
-    {
-      question: "一般的に弦が6本なのは？",
-      answers: ["ギター", "ベース", "ドラム", "シタール"],
-      correctAnswer: "ギター",
-      id: Math.random().toString(32).substring(2),
-    },
-  ]);
+  >([]);
 
   const [getQuestionAnswers, setGetQuestionAnswers] = useState<
     GETQUESTIONANSWERS | any
@@ -52,6 +32,7 @@ const App: React.FC = () => {
     question: "",
     answers: [""],
     correctAnswer: "",
+    id: "",
   });
 
   const [finishedQuestionAnswers, setFinishedQuestionAnswers] = useState<
@@ -62,10 +43,32 @@ const App: React.FC = () => {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [restQuestions, setRestQuestions] = useState(questionAnswers.length);
   const [qaSwitch, setQaSwitch] = useState(true);
+  const [newQuestion, setNewQuestion] = useState(""); // これは自動型付けでstringになっているはずだが、numberの可能性はないのか？（実際エラーにはならないが、TSは検知してくれないのか？）
+  const [newAnswer1, setNewAnswer1] = useState("");
+  const [newAnswer2, setNewAnswer2] = useState("");
+  const [newAnswer3, setNewAnswer3] = useState("");
+  const [newAnswer4, setNewAnswer4] = useState("");
+  const [newCorrectAnswer, setNewCorrectAnswer] = useState("");
 
   const question = getQuestionAnswers.question;
   const answers = getQuestionAnswers.answers;
 
+  useEffect(() => {
+    // アプリケーションが立ち上がった時にFirebaseにアクセスして、存在するデータベースのtaskの内容を取得してきたい => useEffect
+    const unSub = db.collection("questionAnswers").onSnapshot((snapshot) => {
+      // db（Firestoreにアクセス）.collection("コレクション名").onSnapshot((snapshot) => {})
+      setQuestionAnswers(
+        snapshot.docs.map((doc) => ({
+          question: doc.data().question,
+          answers: doc.data().answers,
+          correctAnswer: doc.data().correctAnswer,
+          id: doc.id,
+        })) // snapshotが常にFirestoreの変更を監視しているため、変更があると即座に反映される！（データベースに変更があると、snapshotが毎回シャッターを押す）
+      ); // collection("questionAnswers") => [{id: ~, title, ~}, {id: ~, title, ~}, {id: ~, title, ~}]
+    });
+    return () => unSub(); // クリーンナップ関数（アンマウント時はFirebase側の変化を監視をする必要がないので、停止（db.collectionの返り値））
+    // クリーンナップ関数、アンマウント時（ブラウザの更新時など？、マウントされていたReactのコンポーネントがDOMから解放されるとき）に行われる処理を定義
+  }, []); // アプリケーションが起動した最初の一回だけデータを読みに行きたい => 第二引数は空の[]
   const changeQuestions = () => {
     if (questionAnswers.length > 0) {
       //　様々な問題+回答が入った配列をシャッフル
@@ -177,28 +180,19 @@ const App: React.FC = () => {
     );
   };
 
-  const [newQuestion, setNewQuestion] = useState(""); // これは自動型付けでstringになっているはずだが、numberの可能性はないのか？（実際エラーにはならないが、TSは検知してくれないのか？）
-  const [newAnswer1, setNewAnswer1] = useState("");
-  const [newAnswer2, setNewAnswer2] = useState("");
-  const [newAnswer3, setNewAnswer3] = useState("");
-  const [newAnswer4, setNewAnswer4] = useState("");
-  const [newCorrectAnswer, setNewCorrectAnswer] = useState("");
   // 新たな問題と回答を追加する処理
   const addQuestionAnswers = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     alert("問題を追加します");
     e.preventDefault();
+    db.collection("questionAnswers").add({
+      question: newQuestion,
+      answers: [newAnswer1, newAnswer2, newAnswer3, newAnswer4],
+      correctAnswer: newCorrectAnswer,
+      id: Math.random().toString(32).substring(2),
+    });
 
-    setQuestionAnswers([
-      ...questionAnswers,
-      {
-        question: newQuestion,
-        answers: [newAnswer1, newAnswer2, newAnswer3, newAnswer4],
-        correctAnswer: newCorrectAnswer,
-        id: Math.random().toString(32).substring(2),
-      },
-    ]);
     setNewQuestion("");
     setNewAnswer1("");
     setNewAnswer2("");
@@ -207,23 +201,6 @@ const App: React.FC = () => {
     setNewCorrectAnswer("");
   };
 
-  // const editQuestionAnswers = () => {
-  //   setNewQuestion("a")
-  //   setNewAnswer1("a")
-  //   setNewAnswer2("a")
-  //   setNewAnswer3("a")
-  //   setNewAnswer4("a")
-  //   setNewCorrectAnswer("a")
-  // };
-
-  const deleteQuestionAnswers = (id: number) => {
-    alert("削除します");
-    setQuestionAnswers(
-      questionAnswers.filter(
-        (questionAnswer: QUESTIONANSWERS) => questionAnswer.id !== id
-      )
-    );
-  };
 
   return (
     <Router>
@@ -260,19 +237,6 @@ const App: React.FC = () => {
               questionAnswers={questionAnswers}
               resetQuestionAnswers={resetQuestionAnswers}
               // editQuestionAnswers={editQuestionAnswers}
-              deleteQuestionAnswers={deleteQuestionAnswers}
-              newQuestion={newQuestion}
-              newAnswer1={newAnswer1}
-              newAnswer2={newAnswer2}
-              newAnswer3={newAnswer3}
-              newAnswer4={newAnswer4}
-              newCorrectAnswer={newCorrectAnswer}
-              setNewQuestion={setNewQuestion}
-              setNewAnswer1={setNewAnswer1}
-              setNewAnswer2={setNewAnswer2}
-              setNewAnswer3={setNewAnswer3}
-              setNewAnswer4={setNewAnswer4}
-              setNewCorrectAnswer={setNewCorrectAnswer}
             />
           )}
         />

@@ -32,7 +32,7 @@
 }
 
 .flexRow {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
 }
@@ -43,6 +43,16 @@
   flex-flow: column;
 }
 
-.textAlignLeft {
+.editContainer {
+  width: 80%;
   text-align: left;
+}
+
+
+.textField {
+  width: 100%;
+}
+
+.qandaTitle {
+  width: 10%;
 }
