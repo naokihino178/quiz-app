@@ -8,10 +8,9 @@ interface PROPS {
 
 const Menu: React.FC<PROPS> = ({ changeQuestions }) => {
   return (
-    <>
+    <div className="menuContainer">
       <h1>クイズ</h1>
-      <h3>目指せ全問正解！</h3>
-      <div className="flexRow">
+      <div className="menuButtonContainer">
         <Button
           color="primary"
           variant="contained"
@@ -30,7 +29,7 @@ const Menu: React.FC<PROPS> = ({ changeQuestions }) => {
           問題を編集する
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 
