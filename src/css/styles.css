@@ -1,6 +1,5 @@
 .container {
   width: 700px;
-  height: 900px;
   margin: 0 auto;
   padding: 30px;
   background: rgb(150, 150, 150);
@@ -10,6 +9,23 @@
   justify-content: space-around;
 }
 
+/* menu */
+.menuContainer {
+  width: 700px;
+  height: 700px;
+  background: rgb(150, 150, 150);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.menuButtonContainer {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .buttonSize {
   width: 100%;
   height: 50px;
@@ -17,13 +33,17 @@
 
 .answersContainer {
   width: 450px;
-  height: 350px;
+  height: 700px;
   padding: 30px;
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: space-around;
 }
+
+/* .resultContainer {
+
+} */
 
 .flexColumn {
   display: flex;
