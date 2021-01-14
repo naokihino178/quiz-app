@@ -9,22 +9,31 @@ interface PROPS {
   resetQuestionAnswers: VoidFunction;
 }
 
-const Result: React.FC<PROPS> = ({ score, questionNumber, resetQuestionAnswers }) => {
+const Result: React.FC<PROPS> = ({
+  score,
+  questionNumber,
+  resetQuestionAnswers,
+}) => {
   return (
-    <div className="answersContainer">
+    <div className="resultContainer">
       <h1>結果</h1>
-      <h3>問題数：{questionNumber}</h3>
-      <h3>正解数：{score}</h3>
-      <h3>正解率：{Math.round((score / questionNumber) * 100)}%</h3>
-      <div className="flexRow">
+      <h2>問題数：{questionNumber}</h2>
+      <h2>正解数：{score}</h2>
+      <h2>正解率：{Math.round((score / questionNumber) * 100)}%</h2>
+      <div className="resultButtonContainer">
         <Button variant="contained" color="primary">
           <Twitter />
           <span>結果をTweetする</span>
         </Button>
+        <Button
+          variant="contained"
+          component={Link}
+          to="/"
+          onClick={resetQuestionAnswers}
+        >
+          メニューへ戻る
+        </Button>
       </div>
-      <Button variant="contained" component={Link} to="/" onClick={resetQuestionAnswers}>
-        メニューへ戻る
-      </Button>
     </div>
   );
 };

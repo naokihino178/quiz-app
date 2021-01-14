@@ -21,7 +21,7 @@ const Answers: React.FC<PROPS> = ({
       <Button
         variant="contained"
         color="primary"
-        className="buttonSize"
+        className="answerButton"
         onClick={check1}
         id="button1"
       >
@@ -30,7 +30,7 @@ const Answers: React.FC<PROPS> = ({
       <Button
         variant="contained"
         color="primary"
-        className="buttonSize"
+        className="answerButton"
         onClick={check2}
         id="button2"
       >
@@ -39,7 +39,7 @@ const Answers: React.FC<PROPS> = ({
       <Button
         variant="contained"
         color="primary"
-        className="buttonSize"
+        className="answerButton"
         onClick={check3}
         id="button3"
       >
@@ -48,7 +48,7 @@ const Answers: React.FC<PROPS> = ({
       <Button
         variant="contained"
         color="primary"
-        className="buttonSize"
+        className="answerButton"
         onClick={check4}
         id="button4"
       >

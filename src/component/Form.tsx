@@ -54,6 +54,7 @@ const Form: React.FC<PROPS> = ({
       <form className="formContainer" noValidate autoComplete="off">
         <TextField
           id="outlined-basic"
+          inputProps={{ style: { color: "white" } }}
           label="問題"
           value={newQuestion}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +63,7 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          inputProps={{ style: { color: "white" } }}
           label="回答1"
           size="small"
           value={newAnswer1}
@@ -71,6 +73,7 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          inputProps={{ style: { color: "white" } }}
           label="回答2"
           size="small"
           value={newAnswer2}
@@ -80,6 +83,7 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          inputProps={{ style: { color: "white" } }}
           label="回答3"
           size="small"
           value={newAnswer3}
@@ -89,6 +93,7 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          inputProps={{ style: { color: "white" } }}
           label="回答4"
           size="small"
           value={newAnswer4}
@@ -98,6 +103,7 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          inputProps={{ style: { color: "white" } }}
           label="正解の回答"
           color="secondary"
           value={newCorrectAnswer}

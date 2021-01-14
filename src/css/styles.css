@@ -2,7 +2,8 @@
   width: 700px;
   margin: 0 auto;
   padding: 30px;
-  background: rgb(150, 150, 150);
+  color: #61dafb;
+  background: #282d33;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -12,8 +13,7 @@
 /* menu */
 .menuContainer {
   width: 700px;
-  height: 700px;
-  background: rgb(150, 150, 150);
+  height: 550px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -26,24 +26,52 @@
   justify-content: space-between;
 }
 
-.buttonSize {
-  width: 100%;
-  height: 50px;
-}
+/* Answers */
 
 .answersContainer {
-  width: 450px;
-  height: 700px;
-  padding: 30px;
+  width: 500px;
+  height: 400px;
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: space-around;
 }
 
-/* .resultContainer {
+.answerButton {
+  width: 100%;
+  height: 50px;
+}
 
-} */
+/* Result */
+
+.resultContainer {
+  width: 700px;
+  height: 550px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.resultButtonContainer {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Edit */
+
+.editButtonContainer {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.colorWhite {
+  color: white;
+  cursor: pointer;
+}
 
 .flexColumn {
   display: flex;
@@ -67,7 +95,6 @@
   width: 80%;
   text-align: left;
 }
-
 
 .textField {
   width: 100%;

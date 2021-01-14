@@ -28,8 +28,8 @@ const Edit: React.FC<PROPS> = ({
   // };
   return (
     <div className="editContainer">
-      <div className="flexRow">
         <h2>作成した問題</h2>
+      <div className="editButtonContainer">
         <Button
           color="secondary"
           variant="contained"
