@@ -3,7 +3,7 @@ import { Button, TextField } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
 import { db } from "../firebase"; // firebase.tsから、 const db = firebaseApp.firestore()
-import Answers from './Answers';
+import Answers from "./Answers";
 
 // questionAnswersの配列の型
 interface QUESTIONANSWERS {
@@ -36,6 +36,7 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
           <div className="qandaTitle">問題</div>
           <TextField
             className="textField"
+            inputProps={{ style: { color: "white" } }}
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.question}
@@ -50,6 +51,7 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
           <div className="qandaTitle">正解</div>
           <TextField
             className="textField"
+            inputProps={{ style: { color: "white" } }}
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.correctAnswer}
@@ -64,6 +66,7 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
           <div className="qandaTitle">回答1</div>
           <TextField
             className="textField"
+            inputProps={{ style: { color: "white" } }}
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.answers[0]}
@@ -78,6 +81,7 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
           <div className="qandaTitle">回答2</div>
           <TextField
             className="textField"
+            inputProps={{ style: { color: "white" } }}
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.answers[1]}
@@ -92,6 +96,7 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
           <div className="qandaTitle">回答3</div>
           <TextField
             className="textField"
+            inputProps={{ style: { color: "white" } }}
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.answers[2]}
@@ -106,6 +111,7 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
           <div className="qandaTitle">回答4</div>
           <TextField
             className="textField"
+            inputProps={{ style: { color: "white" } }}
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.answers[3]}
@@ -130,8 +136,10 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
               setEditAnswer4(questionAnswer.answers[3]);
             }}
           >
-            <EditIcon />
-            編集する
+            <div className="colorWhite">
+              <EditIcon />
+              編集する
+            </div>
           </Button>
         ) : (
           <Button // 編集終了ボタン
@@ -147,8 +155,10 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
                 });
             }}
           >
-            <EditIcon />
-            編集を終わる
+            <div className="colorWhite">
+              <EditIcon />
+              編集を終わる
+            </div>
           </Button>
         )}
         <Button // 削除用ボタン
@@ -157,8 +167,10 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
             db.collection("questionAnswers").doc(questionAnswer.id).delete(); // ドキュメントを削除 // 警告: ドキュメントを削除しても、そのドキュメントのサブコレクションは削除されません。（<= 公式にあった、どういうことか理解しとけ）
           }}
         >
-          <Delete />
-          削除する
+          <div className="colorWhite">
+            <Delete />
+            削除する
+          </div>
         </Button>
       </div>
     </div>
