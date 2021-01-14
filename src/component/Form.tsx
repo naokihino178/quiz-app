@@ -54,8 +54,10 @@ const Form: React.FC<PROPS> = ({
       <form className="formContainer" noValidate autoComplete="off">
         <TextField
           id="outlined-basic"
+          className="textField"
           inputProps={{ style: { color: "white" } }}
-          label="問題"
+          placeholder="問題1"
+          // label="問題"
           value={newQuestion}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewQuestion(e.target.value);
@@ -63,8 +65,10 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          className="textField"
           inputProps={{ style: { color: "white" } }}
-          label="回答1"
+          placeholder="回答1"
+          // label="回答1"
           size="small"
           value={newAnswer1}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,8 +77,10 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          className="textField"
           inputProps={{ style: { color: "white" } }}
-          label="回答2"
+          placeholder="回答2"
+          // label="回答2"
           size="small"
           value={newAnswer2}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,8 +89,10 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          className="textField"
           inputProps={{ style: { color: "white" } }}
-          label="回答3"
+          placeholder="回答3"
+          // label="回答3"
           size="small"
           value={newAnswer3}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,8 +101,10 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          className="textField"
           inputProps={{ style: { color: "white" } }}
-          label="回答4"
+          placeholder="回答4"
+          // label="回答4"
           size="small"
           value={newAnswer4}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,9 +113,10 @@ const Form: React.FC<PROPS> = ({
         />
         <TextField
           id="outlined-basic"
+          className="textField"
           inputProps={{ style: { color: "white" } }}
-          label="正解の回答"
-          color="secondary"
+          placeholder="正解の回答"
+          // label="正解の回答"
           value={newCorrectAnswer}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewCorrectAnswer(e.target.value);
