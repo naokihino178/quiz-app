@@ -1,13 +1,7 @@
 import React from "react";
 import { Button, TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
-// questionAnswersの配列の型
-interface QUESTIONANSWERS {
-  question: string;
-  answers: string[];
-  correctAnswer: string;
-  id: number | string;
-}
+
 // Propsの型
 interface PROPS {
   newQuestion: string;
@@ -22,15 +16,13 @@ interface PROPS {
   setNewAnswer3: React.Dispatch<React.SetStateAction<string>>;
   setNewAnswer4: React.Dispatch<React.SetStateAction<string>>;
   setNewCorrectAnswer: React.Dispatch<React.SetStateAction<string>>;
-  questionAnswers: Array<QUESTIONANSWERS>;
-  setQuestionAnswers: React.Dispatch<React.SetStateAction<QUESTIONANSWERS[]>>;
   resetQuestionAnswers: VoidFunction;
   addQuestionAnswers: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
 }
 
-const Form: React.FC<PROPS> = ({
+const Create: React.FC<PROPS> = ({
   newQuestion,
   newAnswer1,
   newAnswer2,
@@ -43,86 +35,90 @@ const Form: React.FC<PROPS> = ({
   setNewAnswer3,
   setNewAnswer4,
   setNewCorrectAnswer,
-  questionAnswers,
-  setQuestionAnswers,
   resetQuestionAnswers,
   addQuestionAnswers,
 }) => {
   return (
-    <div className="answersContainer">
+    <div className="createContainer">
       <h2>問題の作成</h2>
-      <form className="formContainer" noValidate autoComplete="off">
+      <div className="flexRow">
+        <div className="qandaTitle">問題</div>
         <TextField
           id="outlined-basic"
           className="textField"
           inputProps={{ style: { color: "white" } }}
-          placeholder="問題1"
-          // label="問題"
           value={newQuestion}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewQuestion(e.target.value);
           }}
         />
+      </div>
+      <div className="flexRow">
+        <div className="qandaTitle">正解</div>
         <TextField
           id="outlined-basic"
           className="textField"
           inputProps={{ style: { color: "white" } }}
-          placeholder="回答1"
-          // label="回答1"
+          value={newCorrectAnswer}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setNewCorrectAnswer(e.target.value);
+          }}
+        />
+      </div>
+      <div className="flexRow">
+        <div className="qandaTitle">回答1</div>
+        <TextField
+          id="outlined-basic"
+          className="textField"
+          inputProps={{ style: { color: "white" } }}
           size="small"
           value={newAnswer1}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer1(e.target.value);
           }}
         />
+      </div>
+      <div className="flexRow">
+        <div className="qandaTitle">回答2</div>
         <TextField
           id="outlined-basic"
           className="textField"
           inputProps={{ style: { color: "white" } }}
-          placeholder="回答2"
-          // label="回答2"
           size="small"
           value={newAnswer2}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer2(e.target.value);
           }}
         />
+      </div>
+      <div className="flexRow">
+        <div className="qandaTitle">回答3</div>
+
         <TextField
           id="outlined-basic"
           className="textField"
           inputProps={{ style: { color: "white" } }}
-          placeholder="回答3"
-          // label="回答3"
           size="small"
           value={newAnswer3}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer3(e.target.value);
           }}
         />
+      </div>
+      <div className="flexRow">
+        <div className="qandaTitle">回答4</div>
+
         <TextField
           id="outlined-basic"
           className="textField"
           inputProps={{ style: { color: "white" } }}
-          placeholder="回答4"
-          // label="回答4"
           size="small"
           value={newAnswer4}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer4(e.target.value);
           }}
         />
-        <TextField
-          id="outlined-basic"
-          className="textField"
-          inputProps={{ style: { color: "white" } }}
-          placeholder="正解の回答"
-          // label="正解の回答"
-          value={newCorrectAnswer}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewCorrectAnswer(e.target.value);
-          }}
-        />
-      </form>
+      </div>
       <div className="flexRow">
         <Button
           color="primary"
@@ -145,4 +141,4 @@ const Form: React.FC<PROPS> = ({
   );
 };
 
-export default Form;
+export default Create;

@@ -3,7 +3,6 @@ import { Button, TextField } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
 import { db } from "../firebase"; // firebase.tsから、 const db = firebaseApp.firestore()
-import Answers from "./Answers";
 
 // questionAnswersの配列の型
 interface QUESTIONANSWERS {
@@ -16,10 +15,9 @@ interface QUESTIONANSWERS {
 interface PROPS {
   questionAnswers: Array<QUESTIONANSWERS>;
   questionAnswer: any;
-  resetQuestionAnswers: VoidFunction;
 }
 
-const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
+const Question: React.FC<PROPS> = ({ questionAnswer}) => {
   // 問題ひとつひとつにstateを持たせる
   const [editQuestion, setEditQuestion] = useState("");
   const [editCorrectAnswer, setEditCorrectAnswer] = useState("");
@@ -177,4 +175,4 @@ const QandA: React.FC<PROPS> = ({ questionAnswer, resetQuestionAnswers }) => {
   );
 };
 
-export default QandA;
+export default Question;

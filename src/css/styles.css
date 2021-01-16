@@ -26,11 +26,11 @@
   justify-content: space-between;
 }
 
-/* Answers */
+/* Game */
 
-.answersContainer {
+.gameContainer {
   width: 500px;
-  height: 400px;
+  height: 423px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -54,13 +54,23 @@
   justify-content: space-around;
 }
 
-.resultButtonContainer {
+/* .resultButtonContainer {
   width: 50%;
   display: flex;
   justify-content: space-between;
-}
+} */
 
 /* Edit */
+
+.createContainer {
+  width: 500px;
+  height: 400px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
 
 .editButtonContainer {
   width: 50%;
@@ -104,4 +114,11 @@
 
 .qandaTitle {
   width: 10%;
+}
+
+.questionContainer {
+  padding: 30px 30px 10px;
+  margin-bottom: 20px;
+  border: 1px rgb(255, 255, 251) solid;
+  border-radius: 5px;
 }

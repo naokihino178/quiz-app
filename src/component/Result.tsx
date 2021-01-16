@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import { Twitter } from "@material-ui/icons";
+// import { Twitter } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
 interface PROPS {
@@ -20,11 +20,11 @@ const Result: React.FC<PROPS> = ({
       <h2>問題数：{questionNumber}</h2>
       <h2>正解数：{score}</h2>
       <h2>正解率：{Math.round((score / questionNumber) * 100)}%</h2>
-      <div className="resultButtonContainer">
-        <Button variant="contained" color="primary">
+      <div>
+        {/* <Button variant="contained" color="primary">
           <Twitter />
           <span>結果をTweetする</span>
-        </Button>
+        </Button> */}
         <Button
           variant="contained"
           component={Link}

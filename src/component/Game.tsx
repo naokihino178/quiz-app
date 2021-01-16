@@ -1,5 +1,4 @@
 import React from "react";
-import Answers from "./Answers";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
@@ -29,13 +28,48 @@ const Game: React.FC<PROPS> = ({
   return (
     <div className="flexColumn">
       <h1>{`Q${questionNumber}: ${question}`}</h1>
-      <Answers
-        answers={answers}
-        check1={check1}
-        check2={check2}
-        check3={check3}
-        check4={check4}
-      />
+      <div className="gameContainer">
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ textTransform: "none", fontSize: "22px" }}
+          className="answerButton"
+          onClick={check1}
+          id="button1"
+        >
+          {answers![0]}
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ textTransform: "none", fontSize: "22px" }}
+          className="answerButton"
+          onClick={check2}
+          id="button2"
+        >
+          {answers![1]}
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ textTransform: "none", fontSize: "22px" }}
+          className="answerButton"
+          onClick={check3}
+          id="button3"
+        >
+          {answers![2]}
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ textTransform: "none", fontSize: "22px" }}
+          className="answerButton"
+          onClick={check4}
+          id="button4"
+        >
+          {answers![3]}
+        </Button>
+      </div>
       <div className="flexRow">
         <Button
           variant="contained"
