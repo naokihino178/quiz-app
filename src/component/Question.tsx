@@ -17,7 +17,7 @@ interface PROPS {
   questionAnswer: any;
 }
 
-const Question: React.FC<PROPS> = ({ questionAnswer}) => {
+const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
   // 問題ひとつひとつにstateを持たせる
   const [editQuestion, setEditQuestion] = useState("");
   const [editCorrectAnswer, setEditCorrectAnswer] = useState("");
@@ -39,6 +39,7 @@ const Question: React.FC<PROPS> = ({ questionAnswer}) => {
             id="outlined-basic"
             placeholder={questionAnswer.question}
             // label={questionAnswer.question}
+            autoComplete="off"
             value={editQuestion}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEditQuestion(e.target.value);
@@ -54,6 +55,7 @@ const Question: React.FC<PROPS> = ({ questionAnswer}) => {
             id="outlined-basic"
             placeholder={questionAnswer.correctAnswer}
             // label={questionAnswer.correctAnswer}
+            autoComplete="off"
             value={editCorrectAnswer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEditCorrectAnswer(e.target.value);
@@ -69,6 +71,7 @@ const Question: React.FC<PROPS> = ({ questionAnswer}) => {
             id="outlined-basic"
             placeholder={questionAnswer.answers[0]}
             // label={questionAnswer.answers[0]}
+            autoComplete="off"
             value={editAnswer1}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEditAnswer1(e.target.value);
@@ -84,6 +87,7 @@ const Question: React.FC<PROPS> = ({ questionAnswer}) => {
             id="outlined-basic"
             placeholder={questionAnswer.answers[1]}
             // label={questionAnswer.answers[1]}
+            autoComplete="off"
             value={editAnswer2}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEditAnswer2(e.target.value);
@@ -99,6 +103,7 @@ const Question: React.FC<PROPS> = ({ questionAnswer}) => {
             id="outlined-basic"
             placeholder={questionAnswer.answers[2]}
             // label={questionAnswer.answers[2]}
+            autoComplete="off"
             value={editAnswer3}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEditAnswer3(e.target.value);
@@ -114,6 +119,7 @@ const Question: React.FC<PROPS> = ({ questionAnswer}) => {
             id="outlined-basic"
             placeholder={questionAnswer.answers[3]}
             // label={questionAnswer.answers[3]}
+            autoComplete="off"
             value={editAnswer4}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setEditAnswer4(e.target.value);
@@ -161,8 +167,14 @@ const Question: React.FC<PROPS> = ({ questionAnswer}) => {
         )}
         <Button // 削除用ボタン
           onClick={() => {
-            window.confirm("本当に削除しますか？");
-            db.collection("questionAnswers").doc(questionAnswer.id).delete(); // ドキュメントを削除 // 警告: ドキュメントを削除しても、そのドキュメントのサブコレクションは削除されません。（<= 公式にあった、どういうことか理解しとけ）
+            const check = window.confirm("本当に削除しますか？");
+            if (check && questionAnswers.length !== 1) {
+              db.collection("questionAnswers").doc(questionAnswer.id).delete(); // ドキュメントを削除 // 警告: ドキュメントを削除しても、そのドキュメントのサブコレクションは削除されません。（<= 公式にあった、どういうことか理解しとけ）
+            } else if (check && questionAnswers.length === 1) {
+              alert("問題は最低一つは用意してください");
+            } else {
+              return;
+            }
           }}
         >
           <div className="colorWhite">

@@ -1,3 +1,4 @@
+/* common */
 .container {
   width: 700px;
   margin: 0 auto;
@@ -8,75 +9,6 @@
   flex-flow: column;
   align-items: center;
   justify-content: space-around;
-}
-
-/* menu */
-.menuContainer {
-  width: 700px;
-  height: 550px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.menuButtonContainer {
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Game */
-
-.gameContainer {
-  width: 500px;
-  height: 423px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.answerButton {
-  width: 100%;
-  height: 50px;
-  text-transform: none;
-}
-
-/* Result */
-
-.resultContainer {
-  width: 700px;
-  height: 550px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-/* .resultButtonContainer {
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-} */
-
-/* Edit */
-
-.createContainer {
-  width: 500px;
-  height: 400px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-
-.editButtonContainer {
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
 }
 
 .colorWhite {
@@ -96,15 +28,9 @@
   justify-content: space-around;
 }
 
-.formContainer {
-  width: 80%;
-  display: flex;
-  flex-flow: column;
-}
-
-.editContainer {
-  width: 80%;
-  text-align: left;
+.qandaTitle {
+  width: 10%;
+  margin-right: 5px;
 }
 
 .textField {
@@ -112,13 +38,76 @@
   height: 40px;
 }
 
-.qandaTitle {
-  width: 10%;
+/* Menu */
+.menuContainer {
+  width: 700px;
+  height: 550px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
+.menuButtonContainer {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Game */
+.gameContainer {
+  width: 500px;
+  height: 423px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.answerButton {
+  width: 100%;
+  height: 50px;
+  text-transform: none;
+}
+
+/* Result */
+.resultContainer {
+  width: 700px;
+  height: 550px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* Edit */
+.editContainer {
+  width: 80%;
+  text-align: left;
+}
+
+.editButtonContainer {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+/* Question */
 .questionContainer {
   padding: 30px 30px 10px;
   margin-bottom: 20px;
   border: 1px rgb(255, 255, 251) solid;
   border-radius: 5px;
+}
+
+/* Create */
+
+.createContainer {
+  width: 500px;
+  height: 550px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
 }

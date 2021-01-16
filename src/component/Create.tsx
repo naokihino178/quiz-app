@@ -48,6 +48,7 @@ const Create: React.FC<PROPS> = ({
           className="textField"
           inputProps={{ style: { color: "white" } }}
           value={newQuestion}
+          autoComplete="off"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewQuestion(e.target.value);
           }}
@@ -60,6 +61,7 @@ const Create: React.FC<PROPS> = ({
           className="textField"
           inputProps={{ style: { color: "white" } }}
           value={newCorrectAnswer}
+          autoComplete="off"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewCorrectAnswer(e.target.value);
           }}
@@ -73,6 +75,7 @@ const Create: React.FC<PROPS> = ({
           inputProps={{ style: { color: "white" } }}
           size="small"
           value={newAnswer1}
+          autoComplete="off"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer1(e.target.value);
           }}
@@ -86,6 +89,7 @@ const Create: React.FC<PROPS> = ({
           inputProps={{ style: { color: "white" } }}
           size="small"
           value={newAnswer2}
+          autoComplete="off"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer2(e.target.value);
           }}
@@ -100,6 +104,7 @@ const Create: React.FC<PROPS> = ({
           inputProps={{ style: { color: "white" } }}
           size="small"
           value={newAnswer3}
+          autoComplete="off"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer3(e.target.value);
           }}
@@ -114,6 +119,7 @@ const Create: React.FC<PROPS> = ({
           inputProps={{ style: { color: "white" } }}
           size="small"
           value={newAnswer4}
+          autoComplete="off"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewAnswer4(e.target.value);
           }}
@@ -121,12 +127,12 @@ const Create: React.FC<PROPS> = ({
       </div>
       <div className="flexRow">
         <Button
-          color="primary"
+          color="secondary"
           variant="contained"
           type="submit"
           onClick={addQuestionAnswers}
         >
-          登録
+          問題を追加する
         </Button>
         <Button
           variant="contained"
