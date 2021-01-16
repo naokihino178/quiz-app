@@ -5,7 +5,6 @@ import Edit from "./component/Edit";
 import Menu from "./component/Menu";
 import Create from "./component/Create";
 import { db } from "./firebase"; // firebase.tsから、 const db = firebaseApp.firestore()
-// import { Alert } from "@material-ui/lab";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -37,7 +36,7 @@ const App: React.FC = () => {
   const [score, setScore] = useState(0); // 正解数（正解したら+1）
   const [questionNumber, setQuestionNumber] = useState(0); // 問題数（問題が切り替わったら+1）
   const [restQuestions, setRestQuestions] = useState(questionAnswers.length); // 残りの問題数（）
-  const [qaSwitch, setQaSwitch] = useState(true);
+  const [gameResultSwitch, setGameResultSwitch] = useState(true);
   const [newQuestion, setNewQuestion] = useState(""); // これは自動型付けでstringになっているはずだが、numberの可能性はないのか？（実際エラーにはならないが、TSは検知してくれないのか？）
   const [newAnswer1, setNewAnswer1] = useState("");
   const [newAnswer2, setNewAnswer2] = useState("");
@@ -51,7 +50,7 @@ const App: React.FC = () => {
 
   // データベースの問題、回答、正解、idをquestionAnswersにセット
   useEffect(() => {
-    // アプリが立ち上がった時（backMenuに変更があったとき）にFirebaseにアクセスして、データベースの内容を取得 => useEffect
+    // backMenuに変更があった時（アプリ立ち上げ時も）をFirebaseにアクセスして、データベースの内容を取得 => useEffect
     const unSub = db.collection("questionAnswers").onSnapshot((snapshot) => {
       // db（Firestoreにアクセス）.collection("コレクション名").onSnapshot((snapshot) => {})
       setQuestionAnswers(
@@ -67,11 +66,11 @@ const App: React.FC = () => {
     // クリーンナップ関数、アンマウント時（ブラウザの更新時など？、マウントされていたReactのコンポーネントがDOMから解放されるとき）に行われる処理を定義
   }, [backMenu]); //　backMenuに変更があったときだけデータを読みに行きたい => 第二引数は[backMenu]
 
-  // questionAnswers（問題のセット）をシャッフルし、
+  // questionAnswers（問題のセット）をシャッフルし、getQuestionAnswersに代入する処理
   const changeQuestions = () => {
     if (restQuestions > 0) {
-      // 問題途中
-      //　様々な問題+回答が入った配列をシャッフル
+      // 問題途中で回答ボタンを押した時の挙動
+      //　問題+回答が入った配列をシャッフル
       for (let i = questionAnswers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         const tmp = questionAnswers[i];
@@ -92,10 +91,10 @@ const App: React.FC = () => {
       setQuestionNumber(questionNumber + 1);
       setRestQuestions(questionAnswers.length);
     } else if (restQuestions === 0 && questionNumber !== 0) {
-      // 最後の問題
+      // 最後の問題で回答ボタンを押した時の挙動
       setRestQuestions(questionAnswers.length - 1);
     } else {
-      // 問題前
+      // メニュー画面でスタートボタンを押した時の挙動
       for (let i = questionAnswers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         const tmp = questionAnswers[i];
@@ -124,9 +123,11 @@ const App: React.FC = () => {
       document.getElementById("button1")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
+      alert("正解！");
       setScore(score + 1);
       changeQuestions();
     } else {
+      alert("残念！");
       changeQuestions();
     }
   };
@@ -135,9 +136,11 @@ const App: React.FC = () => {
       document.getElementById("button2")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
+      alert("正解！");
       setScore(score + 1);
       changeQuestions();
     } else {
+      alert("残念！");
       changeQuestions();
     }
   };
@@ -146,9 +149,11 @@ const App: React.FC = () => {
       document.getElementById("button3")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
+      alert("正解！");
       setScore(score + 1);
       changeQuestions();
     } else {
+      alert("残念！");
       changeQuestions();
     }
   };
@@ -157,43 +162,33 @@ const App: React.FC = () => {
       document.getElementById("button4")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
+      alert("正解！");
       setScore(score + 1);
       changeQuestions();
     } else {
+      alert("残念！");
       changeQuestions();
     }
   };
-  console.log(`questionAnswers.length: ${questionAnswers.length}`); // 最後に二回0が表示されるのはなぜ？？
+
+  // 確認用
+  console.log(`questionAnswers.length: ${questionAnswers.length}`);
   console.log(`questionAnswers: ${questionAnswers}`);
   console.log(`getQuestionAnswers: ${getQuestionAnswers}`);
   console.log(`questionNumber: ${questionNumber}`);
   console.log(`restQuestions: ${restQuestions}`);
 
+  // 結果画面に移る処理
   if (restQuestions < 0) {
-    setQaSwitch(false);
+    setGameResultSwitch(false);
     setRestQuestions(questionAnswers.length);
   }
 
-  // ゲーム中以外（Result, Edit, Form）にメニューに戻った時の処理
+  // 「メニューに戻る」ボタンを押した時、各stateを初期状態に戻す処理
   const resetQuestionAnswers = () => {
-    setQuestionAnswers([...questionAnswers]); // 未出題の問題、終わった問題をquestionAnswersに戻す（現在の問題はなし）
     setQuestionNumber(0); // 問題数を0に（初期値に戻す）
     setScore(0); // 正解数を0に（初期値に戻す）
-    setQaSwitch(true); // qaSwitchをtrueに（初期値に戻す、Gameコンポーネントが表示される）
-    setRestQuestions(questionAnswers.length); // restQuestionsを
-    setBackMenu(!backMenu);
-  };
-
-  // ゲーム中（Game）にメニューに戻った時の処理
-  const restartQuestionAnswers = () => {
-    // 未出題の問題、現在の問題、終わった問題をquestionAnswersに戻す
-    setQuestionAnswers([...questionAnswers, getQuestionAnswers]);
-    setQuestionNumber(0); // 問題数を0に（初期値に戻す）
-    setScore(0); // 正解数を0に（初期値に戻す）
-    setQaSwitch(true); // qaSwitchをtrueに（初期値に戻す、Gameコンポーネントが表示される）
-    setRestQuestions(
-      questionAnswers.length + 1 // restQuestionsを
-    );
+    setGameResultSwitch(true); // qaSwitchをtrueに（Gameコンポーネントが表示される）
     setBackMenu(!backMenu);
   };
 
@@ -201,20 +196,23 @@ const App: React.FC = () => {
   const addQuestionAnswers = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    alert("問題を追加します");
-    e.preventDefault();
-    db.collection("questionAnswers").add({
-      question: newQuestion,
-      answers: [newAnswer1, newAnswer2, newAnswer3, newAnswer4],
-      correctAnswer: newCorrectAnswer,
-    });
-
-    setNewQuestion("");
-    setNewAnswer1("");
-    setNewAnswer2("");
-    setNewAnswer3("");
-    setNewAnswer4("");
-    setNewCorrectAnswer("");
+    const check = window.confirm(
+      `以下の問題を追加します\n問題:   ${newQuestion}\n正解:   ${newCorrectAnswer}\n回答1: ${newAnswer1}\n回答2: ${newAnswer2}\n回答3: ${newAnswer3}\n回答4: ${newAnswer4}`
+    );
+    if (check) {
+      e.preventDefault();
+      db.collection("questionAnswers").add({
+        question: newQuestion,
+        answers: [newAnswer1, newAnswer2, newAnswer3, newAnswer4],
+        correctAnswer: newCorrectAnswer,
+      });
+      setNewQuestion("");
+      setNewAnswer1("");
+      setNewAnswer2("");
+      setNewAnswer3("");
+      setNewAnswer4("");
+      setNewCorrectAnswer("");
+    }
   };
 
   return (
@@ -238,9 +236,8 @@ const App: React.FC = () => {
               check4={check4}
               score={score}
               questionNumber={questionNumber}
-              qaSwitch={qaSwitch}
+              gameResultSwitch={gameResultSwitch}
               resetQuestionAnswers={resetQuestionAnswers}
-              restartQuestionAnswers={restartQuestionAnswers}
             />
           )}
         />

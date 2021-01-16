@@ -19,7 +19,7 @@ const Result: React.FC<PROPS> = ({
       <h1>結果</h1>
       <h2>問題数：{questionNumber}</h2>
       <h2>正解数：{score}</h2>
-      <h2>正解率：{Math.round((score / questionNumber) * 100)}%</h2>
+      <h2>score：{Math.round((score / questionNumber) * 100)} / 100</h2>
       <div>
         {/* <Button variant="contained" color="primary">
           <Twitter />
