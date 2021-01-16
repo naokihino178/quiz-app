@@ -32,19 +32,17 @@ const Main: React.FC<PROPS> = ({
   return (
     <div>
       {qaSwitch ? (
-        <>
-          <Game
-            question={question}
-            answers={answers}
-            check1={check1}
-            check2={check2}
-            check3={check3}
-            check4={check4}
-            score={score}
-            questionNumber={questionNumber}
-            restartQuestionAnswers={restartQuestionAnswers}
-          />
-        </>
+        <Game
+          question={question}
+          answers={answers}
+          check1={check1}
+          check2={check2}
+          check3={check3}
+          check4={check4}
+          score={score}
+          questionNumber={questionNumber}
+          restartQuestionAnswers={restartQuestionAnswers}
+        />
       ) : (
         <Result
           score={score}
