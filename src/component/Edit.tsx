@@ -19,7 +19,7 @@ interface PROPS {
 const Edit: React.FC<PROPS> = ({ questionAnswers, resetQuestionAnswers }) => {
   return (
     <div className="editContainer">
-      <h2>問題の編集</h2>
+      <h2 className="editTitle">問題の編集</h2>
       <div className="editButtonContainer">
         <Button
           color="secondary"

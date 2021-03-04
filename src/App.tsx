@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./css/styles.css";
+import "./css/reset.css";
 import Main from "./component/Main";
 import Edit from "./component/Edit";
 import Menu from "./component/Menu";
