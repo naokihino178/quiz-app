@@ -9,7 +9,7 @@ interface PROPS {
 const Menu: React.FC<PROPS> = ({ changeQuestions }) => {
   return (
     <div className="menuContainer">
-      <h1>クイズアプリ</h1>
+      <h1 className="title">クイズアプリ</h1>
       <div className="menuButtonContainer">
         <Button
           color="primary"

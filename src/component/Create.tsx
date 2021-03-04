@@ -125,7 +125,7 @@ const Create: React.FC<PROPS> = ({
           }}
         />
       </div>
-      <div className="flexRow">
+      <div className="createButtonContainer">
         <Button
           color="secondary"
           variant="contained"

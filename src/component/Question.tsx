@@ -30,7 +30,7 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
   return (
     <div>
       <div>
-        <div className="flexRow">
+        <div>
           <div className="qandaTitle">問題</div>
           <TextField
             className="textField"
@@ -46,7 +46,7 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             }}
           />
         </div>
-        <div className="flexRow">
+        <div>
           <div className="qandaTitle">正解</div>
           <TextField
             className="textField"
@@ -62,7 +62,7 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             }}
           />
         </div>
-        <div className="flexRow">
+        <div>
           <div className="qandaTitle">回答1</div>
           <TextField
             className="textField"
@@ -78,7 +78,7 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             }}
           />
         </div>
-        <div className="flexRow">
+        <div>
           <div className="qandaTitle">回答2</div>
           <TextField
             className="textField"
@@ -94,7 +94,7 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             }}
           />
         </div>
-        <div className="flexRow">
+        <div>
           <div className="qandaTitle">回答3</div>
           <TextField
             className="textField"
@@ -110,7 +110,7 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             }}
           />
         </div>
-        <div className="flexRow">
+        <div>
           <div className="qandaTitle">回答4</div>
           <TextField
             className="textField"

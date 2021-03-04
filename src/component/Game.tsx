@@ -27,12 +27,12 @@ const Game: React.FC<PROPS> = ({
 }) => {
   return (
     <div className="flexColumn">
-      <h1>{`Q${questionNumber}：${question}`}</h1>
+      <h1 className="question">{`Q${questionNumber}：${question}`}</h1>
       <div className="gameContainer">
         <Button
           variant="contained"
           color="primary"
-          style={{ textTransform: "none", fontSize: "22px" }}
+          style={{ textTransform: "none", fontSize: "18px" }}
           className="answerButton"
           onClick={check1}
           id="button1"
@@ -42,7 +42,7 @@ const Game: React.FC<PROPS> = ({
         <Button
           variant="contained"
           color="primary"
-          style={{ textTransform: "none", fontSize: "22px" }}
+          style={{ textTransform: "none", fontSize: "18px" }}
           className="answerButton"
           onClick={check2}
           id="button2"
@@ -52,7 +52,7 @@ const Game: React.FC<PROPS> = ({
         <Button
           variant="contained"
           color="primary"
-          style={{ textTransform: "none", fontSize: "22px" }}
+          style={{ textTransform: "none", fontSize: "18px" }}
           className="answerButton"
           onClick={check3}
           id="button3"
@@ -62,7 +62,7 @@ const Game: React.FC<PROPS> = ({
         <Button
           variant="contained"
           color="primary"
-          style={{ textTransform: "none", fontSize: "22px" }}
+          style={{ textTransform: "none", fontSize: "18px" }}
           className="answerButton"
           onClick={check4}
           id="button4"
