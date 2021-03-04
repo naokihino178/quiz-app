@@ -5,6 +5,7 @@ import Result from "./Result";
 interface PROPS {
   question: string;
   answers: string[];
+  narrrowDownAnswer: VoidFunction;
   check1: VoidFunction;
   check2: VoidFunction;
   check3: VoidFunction;
@@ -18,6 +19,7 @@ interface PROPS {
 const Main: React.FC<PROPS> = ({
   question,
   answers,
+  narrrowDownAnswer,
   check1,
   check2,
   check3,
@@ -33,6 +35,7 @@ const Main: React.FC<PROPS> = ({
         <Game
           question={question}
           answers={answers}
+          narrrowDownAnswer={narrrowDownAnswer}
           check1={check1}
           check2={check2}
           check3={check3}
