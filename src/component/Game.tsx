@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 interface PROPS {
   question: string;
   answers: string[];
+  narrrowDownAnswer: VoidFunction;
   check1: VoidFunction;
   check2: VoidFunction;
   check3: VoidFunction;
@@ -17,6 +18,7 @@ interface PROPS {
 const Game: React.FC<PROPS> = ({
   question,
   answers,
+  narrrowDownAnswer,
   check1,
   check2,
   check3,
@@ -78,6 +80,9 @@ const Game: React.FC<PROPS> = ({
           onClick={resetQuestionAnswers}
         >
           メニューへ戻る
+        </Button>
+        <Button variant="contained" onClick={narrrowDownAnswer}>
+          50 : 50
         </Button>
       </div>
     </div>

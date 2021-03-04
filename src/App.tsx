@@ -118,6 +118,10 @@ const App: React.FC = () => {
     }
   };
 
+  const narrrowDownAnswer = () => {
+    alert("50 : 50");
+  };
+
   // 正誤判定を行う処理
   const check1 = () => {
     if (
@@ -231,6 +235,7 @@ const App: React.FC = () => {
             <Main
               question={question}
               answers={answers}
+              narrrowDownAnswer={narrrowDownAnswer}
               check1={check1}
               check2={check2}
               check3={check3}
