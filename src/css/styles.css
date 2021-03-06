@@ -89,6 +89,14 @@
   text-transform: none;
 }
 
+.gameButtonContainer {
+  height: 100px;
+  justify-content: space-between;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
 /* Result */
 .resultContainer {
   width: 700px;
@@ -178,7 +186,7 @@
   .questionNumber {
     font-size: 15px;
     margin-bottom: 10px;
-  }  
+  }
 
   .question {
     font-size: 20px;
@@ -190,7 +198,6 @@
     width: 200px;
     height: 300px;
   }
-
 
   .editButtonContainer {
     width: 140px;
@@ -216,5 +223,4 @@
     height: 400px;
     font-size: 15px;
   }
-  
 }

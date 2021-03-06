@@ -75,15 +75,7 @@ const Game: React.FC<PROPS> = ({
           {answers![3]}
         </Button>
       </div>
-      <div className="flexRow">
-        {/* <Button
-          variant="contained"
-          component={Link}
-          to="/"
-          onClick={resetQuestionAnswers}
-        >
-          メニューへ戻る
-        </Button> */}
+      <div className="gameButtonContainer">
         <Button
           variant="contained"
           onClick={narrrowDownAnswer}
@@ -91,6 +83,14 @@ const Game: React.FC<PROPS> = ({
           disabled={disabled ? true : false}
         >
           50 : 50
+        </Button>
+        <Button
+          variant="contained"
+          component={Link}
+          to="/"
+          onClick={resetQuestionAnswers}
+        >
+          メニューへ戻る
         </Button>
       </div>
     </div>
