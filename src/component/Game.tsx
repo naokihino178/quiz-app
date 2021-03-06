@@ -76,14 +76,14 @@ const Game: React.FC<PROPS> = ({
         </Button>
       </div>
       <div className="flexRow">
-        <Button
+        {/* <Button
           variant="contained"
           component={Link}
           to="/"
           onClick={resetQuestionAnswers}
         >
           メニューへ戻る
-        </Button>
+        </Button> */}
         <Button
           variant="contained"
           onClick={narrrowDownAnswer}
