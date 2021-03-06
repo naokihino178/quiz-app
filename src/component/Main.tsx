@@ -14,6 +14,7 @@ interface PROPS {
   questionNumber: number;
   gameResultSwitch: boolean;
   resetQuestionAnswers: VoidFunction;
+  disabled: boolean;
 }
 
 const Main: React.FC<PROPS> = ({
@@ -28,6 +29,7 @@ const Main: React.FC<PROPS> = ({
   questionNumber,
   gameResultSwitch,
   resetQuestionAnswers,
+  disabled,
 }) => {
   return (
     <div>
@@ -43,6 +45,7 @@ const Main: React.FC<PROPS> = ({
           score={score}
           questionNumber={questionNumber}
           resetQuestionAnswers={resetQuestionAnswers}
+          disabled={disabled}
         />
       ) : (
         <Result
