@@ -120,6 +120,11 @@ const App: React.FC = () => {
     }
   };
 
+  const startGame = () => {
+    changeQuestions();
+    setDisabled(false);
+  };
+
   const narrrowDownAnswer = () => {
     // ↓これだと誤答が三つ全て消えてしまう、二つだけ消す方法はないか？
     // const halfAnswers = answers.map((answer) => {
@@ -254,7 +259,9 @@ const App: React.FC = () => {
         <Route
           exact
           path="/"
-          render={() => <Menu changeQuestions={changeQuestions} />}
+          render={() => (
+            <Menu changeQuestions={changeQuestions} startGame={startGame} />
+          )}
         />
         <Route
           exact
