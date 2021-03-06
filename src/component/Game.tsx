@@ -13,6 +13,7 @@ interface PROPS {
   score: number;
   questionNumber: number;
   resetQuestionAnswers: VoidFunction;
+  disabled: boolean;
 }
 
 const Game: React.FC<PROPS> = ({
@@ -26,6 +27,7 @@ const Game: React.FC<PROPS> = ({
   score,
   questionNumber,
   resetQuestionAnswers,
+  disabled,
 }) => {
   return (
     <div className="flexColumn">
@@ -81,7 +83,12 @@ const Game: React.FC<PROPS> = ({
         >
           メニューへ戻る
         </Button>
-        <Button variant="contained" onClick={narrrowDownAnswer}>
+        <Button
+          variant="contained"
+          onClick={narrrowDownAnswer}
+          color='secondary'
+          disabled={disabled ? true : false}
+        >
           50 : 50
         </Button>
       </div>

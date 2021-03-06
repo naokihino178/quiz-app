@@ -45,9 +45,11 @@ const App: React.FC = () => {
   const [newAnswer4, setNewAnswer4] = useState("");
   const [newCorrectAnswer, setNewCorrectAnswer] = useState("");
   const [backMenu, setBackMenu] = useState(true);
-
+  const [update, setUpdata] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const question = getQuestionAnswers.question;
   const answers = getQuestionAnswers.answers;
+  const correctAnswer = getQuestionAnswers.correctAnswer;
 
   // データベースの問題、回答、正解、idをquestionAnswersにセット
   useEffect(() => {
@@ -119,7 +121,33 @@ const App: React.FC = () => {
   };
 
   const narrrowDownAnswer = () => {
-    alert("50 : 50");
+    // ↓これだと誤答が三つ全て消えてしまう、二つだけ消す方法はないか？
+    // const halfAnswers = answers.map((answer) => {
+    //   if (answer !== correctAnswer) {
+    //     return (answer = "");
+    //   } else {
+    //     return (answer = correctAnswer);
+    //   }
+    // });
+    // console.log(halfAnswers);
+    // answers[0] = halfAnswers[0];
+    // answers[1] = halfAnswers[1];
+    // answers[2] = halfAnswers[2];
+    // answers[3] = halfAnswers[3];
+
+    // 誤答一つ目のインデックス番号を取り出し空文字で置換
+    const incorrectAnswer1 = answers.findIndex((answer) => {
+      return answer !== correctAnswer;
+    });
+    answers[incorrectAnswer1] = "";
+    // 誤答二つ目のインデックス番号を取り出し空文字で置換
+    const incorrectAnswer2 = answers.findIndex((answer) => {
+      return answer !== correctAnswer && answer !== "";
+    });
+    answers[incorrectAnswer2] = "";
+    setDisabled(true);
+    // 強制レンダリング
+    setUpdata(update ? false : true);
   };
 
   // 正誤判定を行う処理
@@ -128,11 +156,11 @@ const App: React.FC = () => {
       document.getElementById("button1")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
-      alert("正解！");
+      // alert("正解！");
       setScore(score + 1);
       changeQuestions();
     } else {
-      alert("残念！");
+      // alert("残念！");
       changeQuestions();
     }
   };
@@ -141,11 +169,11 @@ const App: React.FC = () => {
       document.getElementById("button2")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
-      alert("正解！");
+      // alert("正解！");
       setScore(score + 1);
       changeQuestions();
     } else {
-      alert("残念！");
+      // alert("残念！");
       changeQuestions();
     }
   };
@@ -154,11 +182,11 @@ const App: React.FC = () => {
       document.getElementById("button3")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
-      alert("正解！");
+      // alert("正解！");
       setScore(score + 1);
       changeQuestions();
     } else {
-      alert("残念！");
+      // alert("残念！");
       changeQuestions();
     }
   };
@@ -167,11 +195,11 @@ const App: React.FC = () => {
       document.getElementById("button4")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
-      alert("正解！");
+      // alert("正解！");
       setScore(score + 1);
       changeQuestions();
     } else {
-      alert("残念！");
+      // alert("残念！");
       changeQuestions();
     }
   };
@@ -244,6 +272,7 @@ const App: React.FC = () => {
               questionNumber={questionNumber}
               gameResultSwitch={gameResultSwitch}
               resetQuestionAnswers={resetQuestionAnswers}
+              disabled={disabled}
             />
           )}
         />
