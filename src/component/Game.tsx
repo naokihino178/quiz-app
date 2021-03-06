@@ -31,7 +31,8 @@ const Game: React.FC<PROPS> = ({
 }) => {
   return (
     <div className="flexColumn">
-      <h1 className="question">{`Q${questionNumber}：${question}`}</h1>
+      <h1 className="questionNumber">{`Q${questionNumber}`}</h1>
+      <h1 className="question">{question}</h1>
       <div className="gameContainer">
         <Button
           variant="contained"
