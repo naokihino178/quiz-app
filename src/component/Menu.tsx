@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 
 interface PROPS {
   changeQuestions: VoidFunction;
+  startGame: VoidFunction;
 }
 
-const Menu: React.FC<PROPS> = ({ changeQuestions }) => {
+const Menu: React.FC<PROPS> = ({ changeQuestions, startGame }) => {
   return (
     <div className="menuContainer">
       <h1 className="title">クイズアプリ</h1>
@@ -16,7 +17,7 @@ const Menu: React.FC<PROPS> = ({ changeQuestions }) => {
           variant="contained"
           component={Link}
           to="/main"
-          onClick={changeQuestions}
+          onClick={startGame}
         >
           クイズを始める
         </Button>
