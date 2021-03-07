@@ -135,7 +135,7 @@
 /* Create */
 
 .createContainer {
-  width: 100%;
+  width: 70%;
   height: 550px;
   display: flex;
   flex-flow: column;
@@ -168,6 +168,11 @@
     height: 40px;
     font-size: 2px;
   }
+
+  .createContainer {
+    width: 100%;
+  }
+
 }
 
 /* 〜479px：スマートフォン縦
@@ -186,7 +191,7 @@
   .questionNumber {
     font-size: 15px;
     margin-bottom: 10px;
-  }
+  }  
 
   .question {
     font-size: 20px;
