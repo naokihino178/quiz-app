@@ -234,36 +234,36 @@ const App: React.FC = () => {
   const addQuestionAnswers = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    const check = window.confirm(
-      `以下の問題を追加します\n問題:   ${newQuestion}\n正解:   ${newCorrectAnswer}\n回答1: ${newAnswer1}\n回答2: ${newAnswer2}\n回答3: ${newAnswer3}\n回答4: ${newAnswer4}`
-    );
-    if (check) {
-      if (
-        !newQuestion ||
-        !newCorrectAnswer ||
-        !newAnswer1 ||
-        !newAnswer2 ||
-        !newAnswer3 ||
-        !newAnswer4
-      ) {
-        alert("未入力の項目があります");
-      } else if (
-        newCorrectAnswer !== newAnswer1 &&
-        newCorrectAnswer !== newAnswer2 &&
-        newCorrectAnswer !== newAnswer3 &&
-        newCorrectAnswer !== newAnswer4
-      ) {
-        alert("正解がありません");
-      } else if (
-        (newCorrectAnswer === newAnswer1 && newCorrectAnswer === newAnswer2) ||
-        (newCorrectAnswer === newAnswer1 && newCorrectAnswer === newAnswer3) ||
-        (newCorrectAnswer === newAnswer1 && newCorrectAnswer === newAnswer4) ||
-        (newCorrectAnswer === newAnswer2 && newCorrectAnswer === newAnswer3) ||
-        (newCorrectAnswer === newAnswer2 && newCorrectAnswer === newAnswer4) ||
-        (newCorrectAnswer === newAnswer3 && newCorrectAnswer === newAnswer4)
-      ) {
-        alert("正解が重複しています");
-      } else {
+    if (
+      !newQuestion ||
+      !newCorrectAnswer ||
+      !newAnswer1 ||
+      !newAnswer2 ||
+      !newAnswer3 ||
+      !newAnswer4
+    ) {
+      alert("未入力の項目があります");
+    } else if (
+      newCorrectAnswer !== newAnswer1 &&
+      newCorrectAnswer !== newAnswer2 &&
+      newCorrectAnswer !== newAnswer3 &&
+      newCorrectAnswer !== newAnswer4
+    ) {
+      alert("正解がありません");
+    } else if (
+      (newCorrectAnswer === newAnswer1 && newCorrectAnswer === newAnswer2) ||
+      (newCorrectAnswer === newAnswer1 && newCorrectAnswer === newAnswer3) ||
+      (newCorrectAnswer === newAnswer1 && newCorrectAnswer === newAnswer4) ||
+      (newCorrectAnswer === newAnswer2 && newCorrectAnswer === newAnswer3) ||
+      (newCorrectAnswer === newAnswer2 && newCorrectAnswer === newAnswer4) ||
+      (newCorrectAnswer === newAnswer3 && newCorrectAnswer === newAnswer4)
+    ) {
+      alert("正解が重複しています");
+    } else {
+      const check = window.confirm(
+        `以下の問題を追加します\n問題:   ${newQuestion}\n正解:   ${newCorrectAnswer}\n回答1: ${newAnswer1}\n回答2: ${newAnswer2}\n回答3: ${newAnswer3}\n回答4: ${newAnswer4}`
+      );
+      if (check) {
         e.preventDefault();
         db.collection("questionAnswers").add({
           question: newQuestion,
