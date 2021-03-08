@@ -75,7 +75,7 @@
 
 .gameContainer {
   width: 500px;
-  height: 400px;
+  height: 450px;
   margin: 40px 0;
   display: flex;
   flex-flow: column;
@@ -83,6 +83,25 @@
   justify-content: space-around;
 }
 
+.none {
+  font-size: 30px;
+  /* color: #282d33; */
+  opacity: 0;
+}
+
+.correctOrIncorrect {
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  transition: 1s;
+  /* opacity: 0; /* ←初期値を変更。透明に。*/
+  /* animation: 0.7s fadeIn; ←追加 */
+}
+
+/* @keyframes fadeIn { 
+  from { opacity: 0; }
+  to { opacity: 0.5; }
+} */
 .answerButton {
   width: 100%;
   height: 50px;
@@ -155,12 +174,12 @@
 @media screen and (max-width: 959px) {
   .question {
     font-size: 25px;
-    width: 350px;
+    width: 400px;
   }
 
   .gameContainer {
     width: 300px;
-    height: 300px;
+    height: 400px;
   }
 
   .answerButton {
@@ -172,7 +191,6 @@
   .createContainer {
     width: 100%;
   }
-
 }
 
 /* 〜479px：スマートフォン縦
@@ -191,17 +209,17 @@
   .questionNumber {
     font-size: 15px;
     margin-bottom: 10px;
-  }  
+  }
 
   .question {
     font-size: 20px;
-    width: 200px;
+    width: 250px;
     height: 80px;
   }
 
   .gameContainer {
     width: 200px;
-    height: 300px;
+    height: 400px;
   }
 
   .editButtonContainer {

@@ -52,6 +52,7 @@ const App: React.FC = () => {
   const [correct3, setCorrect3] = useState(true);
   const [correct4, setCorrect4] = useState(true);
   const [nextBtn, setNextBtn] = useState(true);
+  const [modalSwitch, setModalSwitch] = useState(false);
   // const [disabledAnswer, setDisabledAnswer] = useState(false)
 
   const question = getQuestionAnswers.question;
@@ -130,6 +131,7 @@ const App: React.FC = () => {
     setCorrect3(true);
     setCorrect4(true);
     setNextBtn(true);
+    setModalSwitch(false);
   };
 
   const startGame = () => {
@@ -184,10 +186,11 @@ const App: React.FC = () => {
       document.getElementById("button1")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
+      setModalSwitch(true);
       setScore(score + 1);
       changeQuestions();
     } else {
-      // changeQuestions();
+      setModalSwitch(true);
       correctButton();
       setNextBtn(false);
     }
@@ -197,10 +200,11 @@ const App: React.FC = () => {
       document.getElementById("button2")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
+      setModalSwitch(true);
       setScore(score + 1);
       changeQuestions();
     } else {
-      // changeQuestions();
+      setModalSwitch(true);
       correctButton();
       setNextBtn(false);
     }
@@ -210,10 +214,11 @@ const App: React.FC = () => {
       document.getElementById("button3")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
+      setModalSwitch(true);
       setScore(score + 1);
       changeQuestions();
     } else {
-      // changeQuestions();
+      setModalSwitch(true);
       correctButton();
       setNextBtn(false);
     }
@@ -223,10 +228,11 @@ const App: React.FC = () => {
       document.getElementById("button4")?.textContent ===
       getQuestionAnswers.correctAnswer
     ) {
+      setModalSwitch(true);
       setScore(score + 1);
       changeQuestions();
     } else {
-      // changeQuestions();
+      setModalSwitch(true);
       correctButton();
       setNextBtn(false);
     }
@@ -336,6 +342,7 @@ const App: React.FC = () => {
               resetQuestionAnswers={resetQuestionAnswers}
               disabled={disabled}
               nextBtn={nextBtn}
+              modalSwitch={modalSwitch}
             />
           )}
         />

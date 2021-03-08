@@ -21,6 +21,7 @@ interface PROPS {
   resetQuestionAnswers: VoidFunction;
   disabled: boolean;
   nextBtn: boolean;
+  modalSwitch: boolean;
 }
 
 const Main: React.FC<PROPS> = ({
@@ -42,6 +43,7 @@ const Main: React.FC<PROPS> = ({
   resetQuestionAnswers,
   disabled,
   nextBtn,
+  modalSwitch,
 }) => {
   return (
     <div>
@@ -64,6 +66,7 @@ const Main: React.FC<PROPS> = ({
           resetQuestionAnswers={resetQuestionAnswers}
           disabled={disabled}
           nextBtn={nextBtn}
+          modalSwitch={modalSwitch}
         />
       ) : (
         <Result
