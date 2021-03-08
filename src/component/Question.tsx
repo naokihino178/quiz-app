@@ -66,7 +66,7 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
           <div className="qandaTitle">回答1</div>
           <TextField
             className="textField"
-            inputProps={{ style: { color: "white" } }}
+            inputProps={{ style: { color: "white"} }}
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.answers[0]}

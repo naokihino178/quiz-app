@@ -31,7 +31,7 @@ const Result: React.FC<PROPS> = ({
           to="/"
           onClick={resetQuestionAnswers}
         >
-          メニューへ戻る
+          メニューへ
         </Button>
       </div>
     </div>

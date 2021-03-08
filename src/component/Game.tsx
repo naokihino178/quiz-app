@@ -54,7 +54,7 @@ const Game: React.FC<PROPS> = ({
         <Button
           variant="contained"
           color={correct1 ? "primary" : "secondary"}
-          style={{ textTransform: "none", fontSize: "18px" }}
+          style={{ textTransform: "none", fontSize: "16px" }}
           className="answerButton"
           onClick={nextBtn ? check1 : () => {}}
           id="button1"
@@ -64,7 +64,7 @@ const Game: React.FC<PROPS> = ({
         <Button
           variant="contained"
           color={correct2 ? "primary" : "secondary"}
-          style={{ textTransform: "none", fontSize: "18px" }}
+          style={{ textTransform: "none", fontSize: "16px" }}
           className="answerButton"
           onClick={nextBtn ? check2 : () => {}}
           id="button2"
@@ -74,7 +74,7 @@ const Game: React.FC<PROPS> = ({
         <Button
           variant="contained"
           color={correct3 ? "primary" : "secondary"}
-          style={{ textTransform: "none", fontSize: "18px" }}
+          style={{ textTransform: "none", fontSize: "16px" }}
           className="answerButton"
           onClick={nextBtn ? check3 : () => {}}
           id="button3"
@@ -84,7 +84,7 @@ const Game: React.FC<PROPS> = ({
         <Button
           variant="contained"
           color={correct4 ? "primary" : "secondary"}
-          style={{ textTransform: "none", fontSize: "18px" }}
+          style={{ textTransform: "none", fontSize: "16px" }}
           className="answerButton"
           onClick={nextBtn ? check4 : () => {}}
           id="button4"
@@ -108,7 +108,7 @@ const Game: React.FC<PROPS> = ({
             to="/"
             onClick={resetQuestionAnswers}
           >
-            メニューへ戻る
+            メニューへ
           </Button>
           <Button
             variant="contained"
