@@ -6,28 +6,40 @@ interface PROPS {
   question: string;
   answers: string[];
   narrrowDownAnswer: VoidFunction;
+  correct1: boolean;
+  correct2: boolean;
+  correct3: boolean;
+  correct4: boolean;
   check1: VoidFunction;
   check2: VoidFunction;
   check3: VoidFunction;
   check4: VoidFunction;
+  changeQuestions: VoidFunction;
   score: number;
   questionNumber: number;
   resetQuestionAnswers: VoidFunction;
   disabled: boolean;
+  nextBtn: boolean;
 }
 
 const Game: React.FC<PROPS> = ({
   question,
   answers,
   narrrowDownAnswer,
+  correct1,
+  correct2,
+  correct3,
+  correct4,
   check1,
   check2,
   check3,
   check4,
+  changeQuestions,
   score,
   questionNumber,
   resetQuestionAnswers,
   disabled,
+  nextBtn,
 }) => {
   return (
     <div className="flexColumn">
@@ -36,40 +48,40 @@ const Game: React.FC<PROPS> = ({
       <div className="gameContainer">
         <Button
           variant="contained"
-          color="primary"
+          color={correct1 ? "primary" : "secondary"}
           style={{ textTransform: "none", fontSize: "18px" }}
           className="answerButton"
-          onClick={check1}
+          onClick={nextBtn ? check1 : () => {}}
           id="button1"
         >
           {answers![0]}
         </Button>
         <Button
           variant="contained"
-          color="primary"
+          color={correct2 ? "primary" : "secondary"}
           style={{ textTransform: "none", fontSize: "18px" }}
           className="answerButton"
-          onClick={check2}
+          onClick={nextBtn ? check2 : () => {}}
           id="button2"
         >
           {answers![1]}
         </Button>
         <Button
           variant="contained"
-          color="primary"
+          color={correct3 ? "primary" : "secondary"}
           style={{ textTransform: "none", fontSize: "18px" }}
           className="answerButton"
-          onClick={check3}
+          onClick={nextBtn ? check3 : () => {}}
           id="button3"
         >
           {answers![2]}
         </Button>
         <Button
           variant="contained"
-          color="primary"
+          color={correct4 ? "primary" : "secondary"}
           style={{ textTransform: "none", fontSize: "18px" }}
           className="answerButton"
-          onClick={check4}
+          onClick={nextBtn ? check4 : () => {}}
           id="button4"
         >
           {answers![3]}
@@ -78,20 +90,29 @@ const Game: React.FC<PROPS> = ({
       <div className="gameButtonContainer">
         <Button
           variant="contained"
-          onClick={narrrowDownAnswer}
-          color='secondary'
+          onClick={nextBtn ? narrrowDownAnswer : () => {}}
+          color="secondary"
           disabled={disabled ? true : false}
         >
           50 : 50
         </Button>
-        <Button
-          variant="contained"
-          component={Link}
-          to="/"
-          onClick={resetQuestionAnswers}
-        >
-          メニューへ戻る
-        </Button>
+        <div className="flexRow">
+          <Button
+            variant="contained"
+            component={Link}
+            to="/"
+            onClick={resetQuestionAnswers}
+          >
+            メニューへ戻る
+          </Button>
+          <Button
+            variant="contained"
+            onClick={changeQuestions}
+            disabled={nextBtn ? true : false}
+          >
+            次の問題へ
+          </Button>
+        </div>
       </div>
     </div>
   );
