@@ -20,6 +20,7 @@ interface PROPS {
   resetQuestionAnswers: VoidFunction;
   disabled: boolean;
   nextBtn: boolean;
+  modalSwitch: boolean;
 }
 
 const Game: React.FC<PROPS> = ({
@@ -40,12 +41,16 @@ const Game: React.FC<PROPS> = ({
   resetQuestionAnswers,
   disabled,
   nextBtn,
+  modalSwitch,
 }) => {
   return (
     <div className="flexColumn">
       <h1 className="questionNumber">{`Q${questionNumber}`}</h1>
       <h1 className="question">{question}</h1>
       <div className="gameContainer">
+        <p className={modalSwitch ? "correctOrIncorrect" : "none"}>
+          {nextBtn ? "正解！" : "残念！"}
+        </p>
         <Button
           variant="contained"
           color={correct1 ? "primary" : "secondary"}
