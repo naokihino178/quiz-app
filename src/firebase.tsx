@@ -10,7 +10,6 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-// 初期化は一度だけ
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }

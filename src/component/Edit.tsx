@@ -1,18 +1,16 @@
 import React from "react";
-import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 import Question from "./Question";
 
-// questionAnswersの配列の型
-interface QUESTIONANSWERS {
+interface QuestionAnswers {
   question: string;
   answers: string[];
   correctAnswer: string;
   id: string;
 }
-// Propsの型
 interface PROPS {
-  questionAnswers: Array<QUESTIONANSWERS>;
+  questionAnswers: Array<QuestionAnswers>;
   resetQuestionAnswers: VoidFunction;
 }
 
@@ -38,7 +36,7 @@ const Edit: React.FC<PROPS> = ({ questionAnswers, resetQuestionAnswers }) => {
           メニューへ戻る
         </Button>
       </div>
-      {questionAnswers.map((questionAnswer: QUESTIONANSWERS) => (
+      {questionAnswers.map((questionAnswer: QuestionAnswers) => (
         <div className="questionContainer">
           <Question
             questionAnswers={questionAnswers}

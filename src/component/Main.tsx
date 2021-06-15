@@ -2,7 +2,7 @@ import React from "react";
 import Game from "./Game";
 import Result from "./Result";
 
-interface PROPS {
+interface Props {
   question: string;
   answers: string[];
   narrrowDownAnswer: VoidFunction;
@@ -24,7 +24,7 @@ interface PROPS {
   modalSwitch: boolean;
 }
 
-const Main: React.FC<PROPS> = ({
+const Main: React.FC<Props> = ({
   question,
   answers,
   narrrowDownAnswer,

@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
+import { db } from "../firebase";
 import EditIcon from "@material-ui/icons/Edit";
-import { db } from "../firebase"; // firebase.tsから、 const db = firebaseApp.firestore()
 
-// questionAnswersの配列の型
-interface QUESTIONANSWERS {
+interface QuestionAnswers {
   question: string;
   answers: string[];
   correctAnswer: string;
   id: string;
 }
-// Propsの型
-interface PROPS {
-  questionAnswers: Array<QUESTIONANSWERS>;
+
+interface Props {
+  questionAnswers: Array<QuestionAnswers>;
   questionAnswer: any;
 }
 
-const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
+const Question: React.FC<Props> = ({ questionAnswers, questionAnswer }) => {
   // 問題ひとつひとつにstateを持たせる
   const [editQuestion, setEditQuestion] = useState("");
   const [editCorrectAnswer, setEditCorrectAnswer] = useState("");
@@ -38,7 +37,6 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.question}
-            // label={questionAnswer.question}
             autoComplete="off"
             value={editQuestion}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +52,6 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.correctAnswer}
-            // label={questionAnswer.correctAnswer}
             autoComplete="off"
             value={editCorrectAnswer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,11 +63,10 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
           <div className="qandaTitle">回答1</div>
           <TextField
             className="textField"
-            inputProps={{ style: { color: "white"} }}
+            inputProps={{ style: { color: "white" } }}
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.answers[0]}
-            // label={questionAnswer.answers[0]}
             autoComplete="off"
             value={editAnswer1}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +82,6 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.answers[1]}
-            // label={questionAnswer.answers[1]}
             autoComplete="off"
             value={editAnswer2}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,7 +97,6 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.answers[2]}
-            // label={questionAnswer.answers[2]}
             autoComplete="off"
             value={editAnswer3}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,7 +112,6 @@ const Question: React.FC<PROPS> = ({ questionAnswers, questionAnswer }) => {
             disabled={textField}
             id="outlined-basic"
             placeholder={questionAnswer.answers[3]}
-            // label={questionAnswer.answers[3]}
             autoComplete="off"
             value={editAnswer4}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

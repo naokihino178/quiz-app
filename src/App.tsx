@@ -1,44 +1,46 @@
 import React, { useState, useEffect } from "react";
-import "./css/styles.css";
-import "./css/reset.css";
-import Main from "./component/Main";
-import Edit from "./component/Edit";
-import Menu from "./component/Menu";
-import Create from "./component/Create";
-import { db } from "./firebase"; // firebase.tsから、 const db = firebaseApp.firestore()
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Create from "./component/Create";
+import Edit from "./component/Edit";
+import Main from "./component/Main";
+import Menu from "./component/Menu";
+import { db } from "./firebase";
+import "./css/reset.css";
+import "./css/styles.css";
 
 const App: React.FC = () => {
-  interface QUESTIONANSWERS {
+  interface QuestionAnswers {
     question: string;
     answers: string[];
     correctAnswer: string;
   }
 
-  interface GETQUESTIONANSWERS {
+  interface GetQuestionAnswers {
     question: string;
     answers: string[];
     correctAnswer: string;
   }
 
   const [questionAnswers, setQuestionAnswers] = useState<
-    QUESTIONANSWERS[] | any
+    QuestionAnswers[] | any
   >([]);
 
   const [
     getQuestionAnswers,
     setGetQuestionAnswers,
-  ] = useState<GETQUESTIONANSWERS>({
+  ] = useState<GetQuestionAnswers>({
     question: "",
     answers: [""],
     correctAnswer: "",
   });
-
-  const [score, setScore] = useState(0); // 正解数（正解したら+1）
-  const [questionNumber, setQuestionNumber] = useState(0); // 問題数（問題が切り替わったら+1）
-  const [restQuestions, setRestQuestions] = useState(questionAnswers.length); // 残りの問題数（）
+  // 正解数（正解したら+1）
+  const [score, setScore] = useState(0);
+  // 問題数（問題が切り替わったら+1）
+  const [questionNumber, setQuestionNumber] = useState(0);
+  // 残りの問題数
+  const [restQuestions, setRestQuestions] = useState(questionAnswers.length);
   const [gameResultSwitch, setGameResultSwitch] = useState(true);
-  const [newQuestion, setNewQuestion] = useState(""); // これは自動型付けでstringになっているはずだが、numberの可能性はないのか？（実際エラーにはならないが、TSは検知してくれないのか？）
+  const [newQuestion, setNewQuestion] = useState("");
   const [newAnswer1, setNewAnswer1] = useState("");
   const [newAnswer2, setNewAnswer2] = useState("");
   const [newAnswer3, setNewAnswer3] = useState("");
@@ -53,7 +55,6 @@ const App: React.FC = () => {
   const [correct4, setCorrect4] = useState(true);
   const [nextBtn, setNextBtn] = useState(true);
   const [modalSwitch, setModalSwitch] = useState(false);
-  // const [disabledAnswer, setDisabledAnswer] = useState(false)
 
   const question = getQuestionAnswers.question;
   const answers = getQuestionAnswers.answers;
@@ -63,7 +64,6 @@ const App: React.FC = () => {
   useEffect(() => {
     // backMenuに変更があった時（アプリ立ち上げ時も）をFirebaseにアクセスして、データベースの内容を取得 => useEffect
     const unSub = db.collection("questionAnswers").onSnapshot((snapshot) => {
-      // db（Firestoreにアクセス）.collection("コレクション名").onSnapshot((snapshot) => {})
       setQuestionAnswers(
         snapshot.docs.map((doc) => ({
           question: doc.data().question,
@@ -80,7 +80,7 @@ const App: React.FC = () => {
   // questionAnswers（問題のセット）をシャッフルし、getQuestionAnswersに代入する処理
   const changeQuestions = () => {
     if (restQuestions > 0) {
-      // 問題途中で回答ボタンを押した時の挙動
+      // 問題途中で回答ボタンを押した時
       //　問題+回答が入った配列をシャッフル
       for (let i = questionAnswers.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -154,11 +154,6 @@ const App: React.FC = () => {
     // 強制レンダリング
     setUpdate(update ? false : true);
   };
-
-  // 正誤判定
-  // const question = getQuestionAnswers.question;
-  // const answers = getQuestionAnswers.answers;
-  // const correctAnswer = getQuestionAnswers.correctAnswer;
 
   const correctIndex = answers.findIndex((answer) => {
     return answer === correctAnswer;
@@ -238,24 +233,20 @@ const App: React.FC = () => {
     }
   };
 
-  // 確認用
-  console.log(`questionAnswers.length: ${questionAnswers.length}`);
-  console.log(`questionAnswers: ${questionAnswers}`);
-  console.log(`getQuestionAnswers: ${getQuestionAnswers}`);
-  console.log(`questionNumber: ${questionNumber}`);
-  console.log(`restQuestions: ${restQuestions}`);
-
   // 結果画面に移る処理
   if (restQuestions < 0) {
     setGameResultSwitch(false);
     setRestQuestions(questionAnswers.length);
   }
 
-  // 「メニューに戻る」ボタンを押した時、各stateを初期状態に戻す処理
+  // 「メニューへ」ボタンを押した時、各stateを初期状態に戻す処理
   const resetQuestionAnswers = () => {
-    setQuestionNumber(0); // 問題数を0に（初期値に戻す）
-    setScore(0); // 正解数を0に（初期値に戻す）
-    setGameResultSwitch(true); // qaSwitchをtrueに（Gameコンポーネントが表示される）
+    // 問題数を0に（初期値に戻す）
+    setQuestionNumber(0);
+    // 正解数を0に（初期値に戻す）
+    setScore(0);
+    // qaSwitchをtrueに（Gameコンポーネントが表示される）
+    setGameResultSwitch(true);
     setBackMenu(!backMenu);
   };
 
@@ -312,13 +303,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="container">
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <Menu changeQuestions={changeQuestions} startGame={startGame} />
-          )}
-        />
+        <Route exact path="/" render={() => <Menu startGame={startGame} />} />
         <Route
           exact
           path="/main"

@@ -1,13 +1,12 @@
 import React from "react";
-import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
-interface PROPS {
-  changeQuestions: VoidFunction;
+interface Props {
   startGame: VoidFunction;
 }
 
-const Menu: React.FC<PROPS> = ({ changeQuestions, startGame }) => {
+const Menu: React.FC<Props> = ({ startGame }) => {
   return (
     <div className="menuContainer">
       <h1 className="title">クイズアプリ</h1>
