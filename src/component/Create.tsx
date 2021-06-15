@@ -1,9 +1,8 @@
 import React from "react";
-import { Button, TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { Button, TextField } from "@material-ui/core";
 
-// Propsの型
-interface PROPS {
+interface Props {
   newQuestion: string;
   newAnswer1: string;
   newAnswer2: string;
@@ -22,7 +21,7 @@ interface PROPS {
   ) => void;
 }
 
-const Create: React.FC<PROPS> = ({
+const Create: React.FC<Props> = ({
   newQuestion,
   newAnswer1,
   newAnswer2,

@@ -1,8 +1,8 @@
 import React from "react";
-import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
-interface PROPS {
+interface Props {
   question: string;
   answers: string[];
   narrrowDownAnswer: VoidFunction;
@@ -23,7 +23,7 @@ interface PROPS {
   modalSwitch: boolean;
 }
 
-const Game: React.FC<PROPS> = ({
+const Game: React.FC<Props> = ({
   question,
   answers,
   narrrowDownAnswer,

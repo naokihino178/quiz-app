@@ -1,15 +1,14 @@
 import React from "react";
-import { Button } from "@material-ui/core";
-// import { Twitter } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
-interface PROPS {
+interface Props {
   score: number;
   questionNumber: number;
   resetQuestionAnswers: VoidFunction;
 }
 
-const Result: React.FC<PROPS> = ({
+const Result: React.FC<Props> = ({
   score,
   questionNumber,
   resetQuestionAnswers,
@@ -21,10 +20,6 @@ const Result: React.FC<PROPS> = ({
       <h2>正解数：{score}</h2>
       <h2>score：{Math.round((score / questionNumber) * 100)} / 100</h2>
       <div>
-        {/* <Button variant="contained" color="primary">
-          <Twitter />
-          <span>結果をTweetする</span>
-        </Button> */}
         <Button
           variant="contained"
           component={Link}
