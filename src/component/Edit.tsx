@@ -9,12 +9,12 @@ interface QuestionAnswers {
   correctAnswer: string;
   id: string;
 }
-interface PROPS {
+interface Props {
   questionAnswers: Array<QuestionAnswers>;
   resetQuestionAnswers: VoidFunction;
 }
 
-const Edit: React.FC<PROPS> = ({ questionAnswers, resetQuestionAnswers }) => {
+const Edit: React.FC<Props> = ({ questionAnswers, resetQuestionAnswers }) => {
   return (
     <div className="editContainer">
       <h2 className="editTitle">問題の編集</h2>
