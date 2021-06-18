@@ -279,6 +279,16 @@ const App: React.FC = () => {
       (newCorrectAnswer === newAnswer3 && newCorrectAnswer === newAnswer4)
     ) {
       alert("正解が重複しています");
+    } else if (newQuestion.length > 50) {
+      alert("問題は50文字以下にしてください");
+    } else if (
+      newCorrectAnswer.length > 20 ||
+      newAnswer1.length > 20 ||
+      newAnswer2.length > 20 ||
+      newAnswer3.length > 20 ||
+      newAnswer4.length > 20
+    ) {
+      alert("回答は20文字以下にしてください");
     } else {
       const check = window.confirm(
         `以下の問題を追加します\n問題:   ${newQuestion}\n正解:   ${newCorrectAnswer}\n回答1: ${newAnswer1}\n回答2: ${newAnswer2}\n回答3: ${newAnswer3}\n回答4: ${newAnswer4}`

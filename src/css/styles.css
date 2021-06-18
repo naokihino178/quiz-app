@@ -68,7 +68,7 @@
 
 .question {
   font-size: 30px;
-  width: 900px;
+  width: 600px;
   height: 50px;
   text-align: center;
 }
@@ -96,7 +96,7 @@
 }
 
 .answerButton {
-  width: 80%;
+  width: 100%;
   height: 50px;
   text-transform: none;
 }
@@ -170,7 +170,7 @@
   }
 
   .gameContainer {
-    width: 300px;
+    width: 400px;
     height: 400px;
   }
 

@@ -26,6 +26,73 @@ const Question: React.FC<Props> = ({ questionAnswers, questionAnswer }) => {
   const [editAnswer4, setEditAnswer4] = useState("");
   const [textField, setTextField] = useState(true);
 
+  const editStartQuestionAnswers = () => {
+    // textfieldを有効に(disabled = false)
+    setTextField(false);
+    setEditQuestion(questionAnswer.question);
+    setEditCorrectAnswer(questionAnswer.correctAnswer);
+    setEditAnswer1(questionAnswer.answers[0]);
+    setEditAnswer2(questionAnswer.answers[1]);
+    setEditAnswer3(questionAnswer.answers[2]);
+    setEditAnswer4(questionAnswer.answers[3]);
+  };
+
+  const editEndQuestionAnswers = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (
+      !editQuestion ||
+      !editCorrectAnswer ||
+      !editAnswer1 ||
+      !editAnswer2 ||
+      !editAnswer3 ||
+      !editAnswer4
+    ) {
+      alert("未入力の項目があります");
+    } else if (
+      editCorrectAnswer !== editAnswer1 &&
+      editCorrectAnswer !== editAnswer2 &&
+      editCorrectAnswer !== editAnswer3 &&
+      editCorrectAnswer !== editAnswer4
+    ) {
+      alert("正解がありません");
+    } else if (
+      (editCorrectAnswer === editAnswer1 &&
+        editCorrectAnswer === editAnswer2) ||
+      (editCorrectAnswer === editAnswer1 &&
+        editCorrectAnswer === editAnswer3) ||
+      (editCorrectAnswer === editAnswer1 &&
+        editCorrectAnswer === editAnswer4) ||
+      (editCorrectAnswer === editAnswer2 &&
+        editCorrectAnswer === editAnswer3) ||
+      (editCorrectAnswer === editAnswer2 &&
+        editCorrectAnswer === editAnswer4) ||
+      (editCorrectAnswer === editAnswer3 && editCorrectAnswer === editAnswer4)
+    ) {
+      alert("正解が重複しています");
+    } else if (editQuestion.length > 50) {
+      alert("問題は50文字以下にしてください");
+    } else if (
+      editCorrectAnswer.length > 20 ||
+      editAnswer1.length > 20 ||
+      editAnswer2.length > 20 ||
+      editAnswer3.length > 20 ||
+      editAnswer4.length > 20
+    ) {
+      alert("回答は20文字以下にしてください");
+    } else {
+      setTextField(true);
+      db.collection("questionAnswers")
+        .doc(questionAnswer.id)
+        .set({
+          question: editQuestion,
+          answers: [editAnswer1, editAnswer2, editAnswer3, editAnswer4],
+          correctAnswer: editCorrectAnswer,
+          id: questionAnswer.id,
+        });
+    }
+  };
+
   return (
     <div>
       <div>
@@ -123,15 +190,7 @@ const Question: React.FC<Props> = ({ questionAnswers, questionAnswer }) => {
       <div>
         {textField ? (
           <Button // 編集開始ボタン（何も変更せず終了ボタンを押した時に空にならないよう、stateに現在の値を格納しておく）
-            onClick={() => {
-              setTextField(false);
-              setEditQuestion(questionAnswer.question);
-              setEditCorrectAnswer(questionAnswer.correctAnswer);
-              setEditAnswer1(questionAnswer.answers[0]);
-              setEditAnswer2(questionAnswer.answers[1]);
-              setEditAnswer3(questionAnswer.answers[2]);
-              setEditAnswer4(questionAnswer.answers[3]);
-            }}
+            onClick={editStartQuestionAnswers}
           >
             <div className="colorWhite">
               <EditIcon />
@@ -140,17 +199,7 @@ const Question: React.FC<Props> = ({ questionAnswers, questionAnswer }) => {
           </Button>
         ) : (
           <Button // 編集終了ボタン
-            onClick={() => {
-              setTextField(true);
-              db.collection("questionAnswers")
-                .doc(questionAnswer.id)
-                .set({
-                  question: editQuestion,
-                  answers: [editAnswer1, editAnswer2, editAnswer3, editAnswer4],
-                  correctAnswer: editCorrectAnswer,
-                  id: questionAnswer.id,
-                });
-            }}
+            onClick={editEndQuestionAnswers}
           >
             <div className="colorWhite">
               <EditIcon />
@@ -164,7 +213,7 @@ const Question: React.FC<Props> = ({ questionAnswers, questionAnswer }) => {
             if (check && questionAnswers.length !== 1) {
               db.collection("questionAnswers").doc(questionAnswer.id).delete(); // ドキュメントを削除 // 警告: ドキュメントを削除しても、そのドキュメントのサブコレクションは削除されません。（<= 公式にあった、どういうことか理解しとけ）
             } else if (check && questionAnswers.length === 1) {
-              alert("問題は最低一つは用意してください");
+              alert("最低一つ問題を用意してください");
             } else {
               return;
             }
