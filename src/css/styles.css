@@ -1,15 +1,15 @@
 /* 共通 */
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
   padding: 30px;
-  color: #61dafb;
   background: #282d33;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
+  color: #61dafb;
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ",
     Meiryo, "ＭＳ Ｐゴシック", sans-serif;
 }
@@ -21,14 +21,14 @@
 
 .flexColumn {
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   align-items: center;
 }
 
 .flexRow {
-  width: 100%;
   display: flex;
   justify-content: space-around;
+  width: 100%;
 }
 
 .qandaTitle {
@@ -46,52 +46,52 @@
 }
 
 .menuContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 100%;
   height: 550px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .menuButtonContainer {
-  width: 300px;
   display: flex;
   justify-content: space-between;
+  width: 300px;
 }
 
 /* Game */
 .questionNumber {
-  font-size: 25px;
   margin-bottom: 10px;
+  font-size: 25px;
 }
 
 .question {
-  font-size: 30px;
   width: 600px;
   height: 50px;
+  font-size: 30px;
   text-align: center;
 }
 
 .gameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 500px;
   height: 450px;
   margin: 40px 0;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .none {
-  font-size: 30px;
   opacity: 0;
+  font-size: 30px;
 }
 
 .correctOrIncorrect {
-  font-size: 30px;
-  font-weight: bold;
   color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 30px;
   transition: 1s;
 }
 
@@ -102,22 +102,22 @@
 }
 
 .gameButtonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: 250px;
   height: 100px;
-  justify-content: space-between;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
 }
 
 /* Result */
 .resultContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 700px;
   height: 550px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
 }
 
 /* Edit */
@@ -132,27 +132,27 @@
 
 .editButtonContainer {
   width: 300px;
+  margin: 30px 0;
   display: flex;
   justify-content: space-between;
-  margin: 30px 0;
 }
 
 /* Question */
 .questionContainer {
-  padding: 30px 30px 10px;
   margin-bottom: 20px;
+  padding: 30px 30px 10px;
   border: 1px rgb(255, 255, 251) solid;
   border-radius: 5px;
 }
 
 /* Create */
 .createContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   width: 70%;
   height: 550px;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .createButtonContainer {
@@ -165,8 +165,8 @@
 ------------------------------ */
 @media screen and (max-width: 959px) {
   .question {
-    font-size: 25px;
     width: 450px;
+    font-size: 25px;
   }
 
   .gameContainer {
@@ -193,20 +193,20 @@
   }
 
   .menuButtonContainer {
+    flex-direction: column;
     width: 150px;
     height: 90px;
-    flex-direction: column;
   }
 
   .questionNumber {
-    font-size: 15px;
     margin-bottom: 10px;
+    font-size: 15px;
   }
 
   .question {
-    font-size: 20px;
     width: 300px;
     height: 80px;
+    font-size: 20px;
   }
 
   .gameContainer {
@@ -215,12 +215,12 @@
   }
 
   .editButtonContainer {
-    width: 140px;
-    height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: 30px 0;
+    width: 140px;
+    height: 80px;
   }
 
   .createContainer {
