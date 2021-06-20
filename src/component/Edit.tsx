@@ -37,7 +37,7 @@ const Edit: React.FC<Props> = ({ questionAnswers, resetQuestionAnswers }) => {
         </Button>
       </div>
       {questionAnswers.map((questionAnswer: QuestionAnswers) => (
-        <div className="questionContainer">
+        <div className="questionContainer" key={questionAnswer.id}>
           <Question
             questionAnswers={questionAnswers}
             questionAnswer={questionAnswer}

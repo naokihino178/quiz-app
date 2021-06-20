@@ -10,6 +10,7 @@ import "./css/styles.css";
 
 const App: React.FC = () => {
   interface QuestionAnswers {
+    id: string;
     question: string;
     answers: string[];
     correctAnswer: string;
@@ -66,10 +67,10 @@ const App: React.FC = () => {
     const unSub = db.collection("questionAnswers").onSnapshot((snapshot) => {
       setQuestionAnswers(
         snapshot.docs.map((doc) => ({
+          id: doc.id,
           question: doc.data().question,
           answers: doc.data().answers,
           correctAnswer: doc.data().correctAnswer,
-          id: doc.id,
         })) // snapshotが常にFirestoreの変更を監視しているため、変更があると即座に反映される！（データベースに変更があると、snapshotが毎回シャッターを押す）
       );
     });
